@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AVISPRO</string>
+    <string name="label_usuario">Username</string>
+    <string name="label_contrasena">Password</string>
+    <string name="boton_login">LOGIN</string>
+    <string name="boton_register">SIGN UP</string>
+    <string name="empty_login">Username or Password empty</string>
+    <string name="wrong_login">Username or Password not valid</string>
+    <string name="boton_cancel">CANCEL</string>
+    <string name="boton_accept">SIGN UP</string>
+</resources>

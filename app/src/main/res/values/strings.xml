@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AVISPRO</string>
+
+    <!-- Login Activity -->
+    <string name="label_usuario">Nombre de Usuario</string>
+    <string name="label_contrasena">Contraseña</string>
+    <string name="boton_login">ENTRAR</string>
+    <string name="boton_register">REGISTRARSE</string>
+
+    <string name="empty_login">Nombre de Usuario o Contraseño vacios.</string>
+    <string name="wrong_login">Nombre de Usuario o Contraseño no válidos.</string>
+
+    <!-- Register Activity -->
+    <string name="boton_accept">REGISTRARSE</string>
+    <string name="boton_cancel">CANCELAR</string>
+
+</resources>

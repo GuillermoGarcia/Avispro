@@ -1,17 +1,21 @@
 <resources>
-    <string name="app_name">AVISPRO</string>
+  <string name="app_name">AVISPRO</string>
 
-    <!-- Login Activity -->
-    <string name="label_usuario">Nombre de Usuario</string>
-    <string name="label_contrasena">Contraseña</string>
-    <string name="boton_login">ENTRAR</string>
-    <string name="boton_register">REGISTRARSE</string>
+  <!-- Login Activity -->
+  <string name="label_usuario">Nombre de Usuario</string>
+  <string name="label_contrasena">Contraseña</string>
+  <string name="boton_login">ENTRAR</string>
+  <string name="boton_register">REGISTRARSE</string>
 
-    <string name="empty_login">Nombre de Usuario o Contraseño vacios.</string>
-    <string name="wrong_login">Nombre de Usuario o Contraseño no válidos.</string>
+  <string name="empty_login"> Usuario o Contraseña vacios.</string>
+  <string name="wrong_login">Usuario o Contraseña no válidos.</string>
 
-    <!-- Register Activity -->
-    <string name="boton_accept">REGISTRARSE</string>
-    <string name="boton_cancel">CANCELAR</string>
+  <!-- Register Activity -->
+  <string name="descp_logo">AVISPRO LOGO</string>
+  <string name="hint_email">Correo Electrónico</string>
+  <string name="hint_password">Contraseña</string>
+  <string name="hint_alias">Apodo / Nick</string>
+  <string name="boton_accept">REGISTRARSE</string>
+  <string name="boton_cancel">CANCELAR</string>
 
 </resources>

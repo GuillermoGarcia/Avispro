@@ -9,4 +9,8 @@
     <string name="wrong_login">Username or Password not valid</string>
     <string name="boton_cancel">CANCEL</string>
     <string name="boton_accept">SIGN UP</string>
+  <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_alias">Nick</string>
+    <string name="descp_logo">AVISPRO LOGO</string>
 </resources>

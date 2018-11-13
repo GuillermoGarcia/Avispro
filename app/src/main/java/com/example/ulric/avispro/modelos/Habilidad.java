@@ -9,15 +9,15 @@ public class Habilidad implements Serializable {
 
   @Expose @SerializedName("idHabilidad") private int idHabilidad;
   @Expose @SerializedName("nombre") private String nombre;
-  @Expose @SerializedName("bonusPrincipal") private String bonusPrincipal;
-  @Expose @SerializedName("bonusSecundario") private String bonusSecundario;
+  @Expose @SerializedName("bonusPrincipal") private String[] bonusPrincipal;
+  @Expose @SerializedName("bonusSecundario") private String[] bonusSecundario;
   @Expose @SerializedName("descripcion") private String descripcion;
   @Expose @SerializedName("tipo") private int tipo;
   @Expose @SerializedName("combate") private boolean combate;
 
   public Habilidad() {}
 
-  public Habilidad(int idHabilidad, String nombre, String bonusPrincipal, String bonusSecundario,
+  public Habilidad(int idHabilidad, String nombre, String[] bonusPrincipal, String[] bonusSecundario,
                    String descripcion, int tipo, boolean combate) {
     this.bonusPrincipal = bonusPrincipal;
     this.bonusSecundario = bonusSecundario;
@@ -28,8 +28,8 @@ public class Habilidad implements Serializable {
     this.tipo = tipo;
   }
 
-  public String getBonusPrincipal() { return bonusPrincipal; }
-  public String getBonusSecundario() { return bonusSecundario; }
+  public String[] getBonusPrincipal() { return bonusPrincipal; }
+  public String[] getBonusSecundario() { return bonusSecundario; }
   public String getDescripcion() { return descripcion; }
   public int getIdHabilidad() { return idHabilidad; }
   public String getNombre() { return nombre; }

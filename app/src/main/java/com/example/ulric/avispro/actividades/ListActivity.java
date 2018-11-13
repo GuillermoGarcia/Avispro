@@ -19,5 +19,6 @@ public class ListActivity extends AppCompatActivity {
       Usuario usuario = (Usuario) bundle.getSerializable("usuario") ;
       Toast.makeText(this, "Bienvenido/a, " + usuario.getAlias(), Toast.LENGTH_LONG).show();
     }
+
   }
 }

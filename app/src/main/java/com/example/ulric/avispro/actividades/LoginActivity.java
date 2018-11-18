@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,14 +17,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.io.Serializable;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -82,58 +75,55 @@ public class LoginActivity extends AppCompatActivity {
 
     // Loguearnos con Firebase utilizando el correo y la contraseña
     mAuth.signInWithEmailAndPassword(usuario, clave)
-        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+      .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+
+          if (task.isSuccessful()) {
+
+            // Recuperamos la información de la base de datos
+            // de Firebase
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            // Obtenemos la información de la colección de usuarios y del documento del usuario
+            // con el que nos hemos identificado
+            db.collection("usuarios").document(mAuth.getCurrentUser().getUid()).get()
+              .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                  if (task.isSuccessful()) {
+                    // Leemos el documento seleccionado
+                    DocumentSnapshot doc = task.getResult();
+
+                    if (doc.exists()) {
+                      // Convertimos a la Clase Usuario los datos del documento
+                      Usuario usuario = doc.toObject(Usuario.class);
+
+                      // Creamos la intención
+                      Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+
+                      // Creamos un objeto de tipo Bundle
+                      Bundle bundle = new Bundle();
+                      bundle.putSerializable("usuario", usuario);
+
+                      // Asociamos el Bundle al Intent
+                      intent.putExtras(bundle);
+
+                      // Lanzar la actividad ListActivity
+                      startActivity(intent);
+                    }
+                  }
+                }
+              });
+          }
+        }
+      }).addOnFailureListener(new OnFailureListener() {
           @Override
-          public void onComplete(@NonNull Task<AuthResult> task) {
-
-            if (task.isSuccessful()) {
-
-              // Recuperamos la información de la base de datos
-              // de Firebase
-              FirebaseDatabase db = FirebaseDatabase.getInstance() ;
-
-              // Creamos una referencia al documento USUARIOS
-              DatabaseReference ref = db.getReference("usuario") ;
-
-              // Obtenemos la información del usuario
-              ref.child(mAuth.getCurrentUser().getUid())
-                  .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                      if (dataSnapshot.exists()) {
-
-                        // Rescatamos la información devuelta por Firebase
-                        Usuario usuario = dataSnapshot.getValue(Usuario.class) ;
-
-                        // Creamos la intención
-                        Intent intent = new Intent(LoginActivity.this, ListActivity.class) ;
-
-                        // Creamos un objeto de tipo Bundle
-                        Bundle bundle = new Bundle() ;
-                        bundle.putSerializable("usuario", usuario) ;
-
-                        // Asociamos el Bundle al Intent
-                        intent.putExtras(bundle) ;
-
-                        // Lanzar la actividad ListActivity
-                        startActivity(intent) ;
-                      }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                  });
-              }
-            }
-          }).addOnFailureListener(new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, R.string.wrong_login, Toast.LENGTH_LONG).show();
-              }
-          });
+          public void onFailure(@NonNull Exception e) {
+            Toast.makeText(LoginActivity.this, R.string.wrong_login, Toast.LENGTH_LONG).show();
+          }
+      });
 
   }
 }

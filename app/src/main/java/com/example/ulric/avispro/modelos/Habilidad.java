@@ -36,8 +36,8 @@ public class Habilidad implements Serializable {
   public int getTipo() { return tipo; }
   public boolean isCombate() { return combate; }
 
-  public void setBonusPrincipal(String bonusPrincipal) { this.bonusPrincipal = bonusPrincipal; }
-  public void setBonusSecundario(String bonusSecundario) { this.bonusSecundario = bonusSecundario; }
+  public void setBonusPrincipal(String[] bonusPrincipal) { this.bonusPrincipal = bonusPrincipal; }
+  public void setBonusSecundario(String[] bonusSecundario) { this.bonusSecundario = bonusSecundario; }
   public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
   public void setIdHabilidad(int idHabilidad) { this.idHabilidad = idHabilidad; }
   public void setCombate(boolean combate) { this.combate = combate; }

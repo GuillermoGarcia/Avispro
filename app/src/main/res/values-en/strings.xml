@@ -13,4 +13,8 @@
     <string name="hint_password">Password</string>
     <string name="hint_alias">Nick</string>
     <string name="descp_logo">AVISPRO LOGO</string>
+  <string name="descp_avatar">AVATAR</string>
+  <string name="character_name">Character Name</string>
+  <string name="character_race">Race  (Culture)</string>
+  <string name="character_level">Level</string>
 </resources>

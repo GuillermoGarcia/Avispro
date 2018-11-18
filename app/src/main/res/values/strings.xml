@@ -18,4 +18,9 @@
   <string name="boton_accept">REGISTRARSE</string>
   <string name="boton_cancel">CANCELAR</string>
 
+  <!-- Sheet Activity -->
+  <string name="descp_avatar">AVATAR</string>
+  <string name="character_name">Nombre Personaje</string>
+  <string name="character_race">Raza (Cultura)</string>
+  <string name="character_level">Nivel</string>
 </resources>

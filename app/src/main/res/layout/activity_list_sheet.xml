@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:clickable="true"
+  android:focusable="true"
+  card_view:cardElevation="8dp"
+  card_view:cardCornerRadius="2dp"
+  card_view:cardUseCompatPadding="true"
+  card_view:layout_constraintEnd_toEndOf="parent">
+
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp" >
+
+
+    <ImageView
+      android:id="@+id/iavatar"
+      android:layout_width="128dp"
+      android:layout_height="128dp"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="15dp"
+      android:layout_marginBottom="15dp"
+      android:src="@drawable/avatar_default"
+      android:contentDescription="@string/descp_avatar"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toStartOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/characterName"
+      android:layout_width="90dp"
+      android:layout_height="20dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="40dp"
+      android:text="@string/character_name"
+      card_view:layout_constraintStart_toEndOf="@+id/iavatar"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/characterRace"
+      android:layout_width="90dp"
+      android:layout_height="20dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="40dp"
+      android:text="@string/character_race"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toEndOf="@+id/iavatar"
+
+      />
+
+    <TextView
+      android:id="@+id/characterLevel"
+      android:layout_width="90dp"
+      android:layout_height="20dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="top|end"
+      android:text="@string/character_level"
+      card_view:layout_constraintEnd_toEndOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+
+  </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

@@ -18,7 +18,8 @@
     </activity>
     <activity android:name=".actividades.ListActivity" />
     <activity android:name=".actividades.RegisterActivity" />
-    <activity android:name=".actividades.ListSheetActivity"></activity>
+    <activity android:name=".actividades.ListSheetActivity" />
+    <activity android:name=".actividades.SheetActivity"></activity>
   </application>
 
 </manifest>

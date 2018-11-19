@@ -18,9 +18,19 @@
   <string name="boton_accept">REGISTRARSE</string>
   <string name="boton_cancel">CANCELAR</string>
 
-  <!-- Sheet Activity -->
+  <!-- List Sheet Activity -->
   <string name="descp_avatar">AVATAR</string>
   <string name="character_name">Nombre Personaje</string>
   <string name="character_race">Raza (Cultura)</string>
   <string name="character_level">Nivel</string>
+
+  <!-- Sheet Activity -->
+  <string name="new_sheet">Ficha de Personaje</string>
+  <string name="hint_name_sheet">Nombre del Personaje</string>
+  <string name="hint_race_sheet">Raza del Personaje</string>
+  <string name="hint_age_sheet">Edad del Personaje</string>
+  <string name="hint_culture_sheet">Cultura del Personaje</string>
+  <string name="hint_origin_sheet">Procedencia del Personaje</string>
+  <string name="hint_level_sheet">Nivel del Personaje</string>
+
 </resources>

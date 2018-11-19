@@ -1,31 +1,21 @@
 package com.example.ulric.avispro.adaptadores;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ulric.avispro.R;
 import com.example.ulric.avispro.modelos.Personaje;
-import com.google.firebase.storage.FirebaseStorage;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder> {
+public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sheetsListHolder> {
 
   private int layout;
   private List<Personaje> data;
@@ -34,7 +24,7 @@ public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder>
   private Context contexto;
 
 
-  public sheetAdapter(Context contexto, int layout, List<Personaje> data, OnItemClickListener listener) {
+  public sheetsListAdapter(Context contexto, int layout, List<Personaje> data, OnItemClickListener listener) {
     this.layout = layout;
     this.data = data;
     this.listener = listener;
@@ -48,11 +38,11 @@ public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder>
    * @param viewType
    * define el tipo de la nueva vista
    * @return
-   * un objeto de tipo sheetHolder
+   * un objeto de tipo sheetsListHolder
    */
   @NonNull
   @Override
-  public sheetHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+  public sheetsListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
     // Obtenemos en primer lugar el inflador, que necesitará conocer el contexto
     // en el que vamos a inyectar los elementos de nuestro layout.
@@ -63,25 +53,25 @@ public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder>
     View vista = inflater.inflate(this.layout, null) ;
 
     // Creamos nuestro holder y le proporcionamos la vista obtenida anteriormente.
-    sheetHolder holder = new sheetHolder(vista) ;
+    sheetsListHolder holder = new sheetsListHolder(vista) ;
 
     // Devolvemos el holder.
     return holder ;
   }
 
   /**
-   * @param sheetHolder
+   * @param sheetsListHolder
    * recibe un determinado holder
    * @param pos
    * identifica un determinado ítem dentro del conjunto de datos que maneja el
    * adaptador.
    */
   @Override
-  public void onBindViewHolder(@NonNull sheetHolder sheetHolder, int pos) {
+  public void onBindViewHolder(@NonNull sheetsListHolder sheetsListHolder, int pos) {
 
     // Asociamos al holder el ítem (película) y el listener que deberá estar
     // atento a si el usuario selecciona ese elemento.
-    sheetHolder.bindItem(this.data.get(pos), this.listener) ;
+    sheetsListHolder.bindItem(this.data.get(pos), this.listener) ;
   }
 
   /**
@@ -94,14 +84,14 @@ public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder>
     return this.data.size() ;
   }
 
-  public class sheetHolder extends RecyclerView.ViewHolder {
+  public class sheetsListHolder extends RecyclerView.ViewHolder {
 
     private ImageView avatar;
     private TextView  nombre;
     private TextView  nivel;
     private TextView  raza;
 
-    public sheetHolder(@NonNull View itemView) {
+    public sheetsListHolder(@NonNull View itemView) {
       super(itemView);
 
       avatar = itemView.findViewById(R.id.iavatar);
@@ -116,7 +106,7 @@ public class sheetAdapter extends RecyclerView.Adapter<sheetAdapter.sheetHolder>
       Log.d("Item Nombre: ",item.getNombre()+"");
       nombre.setText(item.getNombre());
       nivel.setText("Nivel "+item.getNivel());
-      raza.setText(item.getRaza());
+      raza.setText(item.getRaza() + " (" + item.getCultura() + ")");
 
 
 

@@ -17,4 +17,11 @@
   <string name="character_name">Character Name</string>
   <string name="character_race">Race  (Culture)</string>
   <string name="character_level">Level</string>
+  <string name="new_sheet">Character Sheet</string>
+  <string name="hint_name_sheet">Character\'s Name</string>
+  <string name="hint_race_sheet">Character\'s Race</string>
+  <string name="hint_age_sheet">Character\'s Age</string>
+  <string name="hint_culture_sheet">Character\'s Culture</string>
+  <string name="hint_origin_sheet">Character\'s Origin</string>
+  <string name="hint_level_sheet">Character\'s Level</string>
 </resources>

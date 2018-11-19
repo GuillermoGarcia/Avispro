@@ -3,7 +3,9 @@ package com.example.ulric.avispro.modelos;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Personaje {
+import java.io.Serializable;
+
+public class Personaje implements Serializable {
 
   @Expose @SerializedName("avatar") private String avatar;
   @Expose @SerializedName("cultura") private String cultura;

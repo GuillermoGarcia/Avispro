@@ -46,14 +46,13 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
 
     // Obtenemos en primer lugar el inflador, que necesitará conocer el contexto
     // en el que vamos a inyectar los elementos de nuestro layout.
-    LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext()) ;
+    LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
     // Obtenido el inflador, inflamos el layout, esto es, añadimos las vistas de
     // éste a las que ya teníamos en viewGroup, generando una nueva vista.
-    View vista = inflater.inflate(this.layout, null) ;
-
+    View vista = inflater.inflate(this.layout, viewGroup, false);
     // Creamos nuestro holder y le proporcionamos la vista obtenida anteriormente.
-    sheetsListHolder holder = new sheetsListHolder(vista) ;
+    sheetsListHolder holder = new sheetsListHolder(vista);
 
     // Devolvemos el holder.
     return holder ;

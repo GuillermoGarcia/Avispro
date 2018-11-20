@@ -3,7 +3,7 @@ package com.example.ulric.avispro.actividades;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -31,16 +31,11 @@ public class ListActivity extends AppCompatActivity {
       Toast.makeText(this, "Bienvenido/a, " + this.usuario.getAlias(), Toast.LENGTH_LONG).show();
     }
 
-    this.personajes = new ArrayList<Personaje>() {{
-        add(new Personaje("", "Dunedain", 27, usuario.getIdUsuario(),
-            1, "Siggurd", 2, "Gondor", "Edain"));
-        add(new Personaje("", "Orcos", 21, usuario.getIdUsuario(),
-                2, "Zradrur", 2, "Morgul", "Goblin"));
-      }};
+    personajes = usuario.cargarPersonajes();
 
     RecyclerView recycler = findViewById(R.id.listActivity);
 
-    GridLayoutManager manager = new GridLayoutManager(this, 1);
+    LinearLayoutManager manager = new LinearLayoutManager(this);
 
     recycler.setLayoutManager(manager);
 

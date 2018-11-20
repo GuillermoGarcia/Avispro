@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "934146481151",
+    "firebase_url": "https://avispro-b193e.firebaseio.com",
+    "project_id": "avispro-b193e",
+    "storage_bucket": "avispro-b193e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934146481151:android:b99205d6b4ec8df7",
+        "android_client_info": {
+          "package_name": "com.example.ulric.avispro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934146481151-680ki8s6mcl9s8ild8eiv0n75tnif7di.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ulric.avispro",
+            "certificate_hash": "e7cbe0d7e029e5cb4333f1ba76dee3e18d9cc3de"
+          }
+        },
+        {
+          "client_id": "934146481151-pmfi08n7sm93s41mdd0r8rvmbon9hjdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHqm7ojqFZ9C_ke24vvJTFTAvIgMoE3xg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934146481151-pmfi08n7sm93s41mdd0r8rvmbon9hjdq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

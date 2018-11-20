@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+
 public class RegisterActivity extends AppCompatActivity {
 
   private Button btnSignUp, btnCancel;
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
               db.collection("usuarios").document(uid)
 
                 // Guardamos los datos del nuevo usuario en el documento
-                .set(new Usuario(uid, ema.getText().toString().trim(), ali.getText().toString().trim()))
+                .set(new Usuario(uid, ema.getText().toString().trim(), ali.getText().toString().trim(), new ArrayList<String>()))
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                   @Override
                   public void onSuccess(Void aVoid) {

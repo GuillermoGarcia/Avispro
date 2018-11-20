@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ public class SheetActivity extends AppCompatActivity {
   TextView  raza;
   Personaje personaje;
   TextView  procedencia;
+  Button    guardar;
+  Button    cancelar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class SheetActivity extends AppCompatActivity {
     nivel = findViewById(R.id.level_sheet);
     raza = findViewById(R.id.race_sheet);
     procedencia = findViewById(R.id.origin_sheet);
+    guardar = findViewById(R.id.save_button);
 
     if (personaje != null) {
       cultura.setText(personaje.getCultura());
@@ -46,6 +51,19 @@ public class SheetActivity extends AppCompatActivity {
       raza.setText(personaje.getRaza());
       procedencia.setText(personaje.getProcedencia());
     }
+
+    guardar.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        personaje.setCultura(cultura.getText().toString().trim());
+        personaje.setEdad(Integer.parseInt(edad.getText().toString().trim()));
+        personaje.setNombre(nombre.getText().toString().trim());
+        personaje.setNivel(Integer.parseInt(nivel.getText().toString().trim()));
+        personaje.setRaza(raza.getText().toString().trim());
+        personaje.setProcedencia(procedencia.getText().toString().trim());
+
+      }
+    });
 
   }
 }

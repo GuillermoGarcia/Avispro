@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ulric.avispro.R;
 import com.example.ulric.avispro.adaptadores.sheetsListAdapter;
+import com.example.ulric.avispro.interfaces.MyCallbackPersonaje;
 import com.example.ulric.avispro.modelos.Personaje;
 import com.example.ulric.avispro.modelos.Usuario;
 
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-  private List<Personaje> personajes;
+  private final List<Personaje> personajes = new ArrayList<>();
   private Usuario usuario;
 
   @Override
@@ -31,7 +33,12 @@ public class ListActivity extends AppCompatActivity {
       Toast.makeText(this, "Bienvenido/a, " + this.usuario.getAlias(), Toast.LENGTH_LONG).show();
     }
 
-    personajes = usuario.cargarPersonajes();
+    usuario.cargarPersonajes(personajes){ }//, new MyCallbackPersonaje() {
+/*    @Override
+      public void onCallback(Personaje personaje) {
+        Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
+      }
+    });*/
 
     RecyclerView recycler = findViewById(R.id.listActivity);
 

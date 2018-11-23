@@ -1,12 +1,20 @@
 package com.example.ulric.avispro.modelos;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.ulric.avispro.interfaces.MyCallbackPersonaje;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -43,34 +51,29 @@ public class Usuario implements Serializable {
   public void setPersonajes(List<String> personajes) { this.personajes = personajes; }
 
 
-  public List<Personaje> cargarPersonajes(){
-    final List<Personaje> personajes = new ArrayList<>();
+  public void cargarPersonajes(final List<Personaje> listaPersonajes){ // , final MyCallbackPersonaje myCallbackPersonaje){
 
     List<String> idPersonajes = this.getPersonajes();
-    final Semaphore semaphores = new Semaphore(idPersonajes.size());
-    semaphores.acquireUninterruptibly(idPersonajes.size());
-    Log.d("Get Personajes", "Semaforo Cerrado. Inicio For de Ids de Personajes.");
-    for (String id : idPersonajes) {
-      FirebaseFirestore.getInstance().collection("personajes").document(id).get()
-        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-          @Override
-          public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-            if (task.isSuccessful()) {
-              // Leemos el documento seleccionado
-              DocumentSnapshot doc = task.getResult();
-
-              if (doc.exists()) {
-                personajes.add(doc.toObject(Personaje.class));
-                semaphores.release();
-              }
-            }
-          }
-        });
+    CollectionReference personajesRef = FirebaseFirestore.getInstance().collection("personajes");
+    for (final String id : idPersonajes) {
+      personajesRef.whereEqualTo("idPersonaje", id);
     }
-    Log.d("Get Personajes", "Terminado For de Ids de Personajes.");
-    semaphores.acquireUninterruptibly(idPersonajes.size());
-    Log.d("Get Personajes", "Semaforo abierto.");
-    return personajes;
+    personajesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+      @Override
+      public void onEvent(@Nullable QuerySnapshot value,
+                          @Nullable FirebaseFirestoreException e) {
+        if (e != null) {
+          Log.e("Firebase Load: ", "Listen failed.", e);
+          return;
+        } else {
+          for (QueryDocumentSnapshot doc : value) {
+            listaPersonajes.add(doc.toObject(Personaje.class));
+            // myCallbackPersonaje.onCallback(doc.toObject(Personaje.class));
+          }
+        }
+      }
+    });
   }
 
 }
+

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.ulric.avispro.interfaces.MyCallbackPersonaje;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.annotations.Expose;
@@ -30,7 +32,7 @@ public class Usuario implements Serializable {
     @Expose @SerializedName("avatar") private String avatar;
     @Expose @SerializedName("personajes") private List<String> personajes;
 
-  public Usuario (){}
+  public Usuario (){ }
 
   public Usuario(String idUsuario, String correo, String alias, List<String> personajes) {
     this.idUsuario = idUsuario;
@@ -38,6 +40,7 @@ public class Usuario implements Serializable {
     this.alias = alias;
     this.personajes = personajes;
   }
+
 
   public String getAlias() { return alias; }
   public String getAvatar() { return avatar; }
@@ -51,28 +54,30 @@ public class Usuario implements Serializable {
   public void setPersonajes(List<String> personajes) { this.personajes = personajes; }
 
 
-  public void cargarPersonajes(final List<Personaje> listaPersonajes){ // , final MyCallbackPersonaje myCallbackPersonaje){
+
+  public void cargarPersonajes(final MyCallbackPersonaje myCallbackPersonaje){
 
     List<String> idPersonajes = this.getPersonajes();
-    CollectionReference personajesRef = FirebaseFirestore.getInstance().collection("personajes");
     for (final String id : idPersonajes) {
-      personajesRef.whereEqualTo("idPersonaje", id);
-    }
-    personajesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-      @Override
-      public void onEvent(@Nullable QuerySnapshot value,
-                          @Nullable FirebaseFirestoreException e) {
-        if (e != null) {
-          Log.e("Firebase Load: ", "Listen failed.", e);
-          return;
-        } else {
-          for (QueryDocumentSnapshot doc : value) {
-            listaPersonajes.add(doc.toObject(Personaje.class));
-            // myCallbackPersonaje.onCallback(doc.toObject(Personaje.class));
+      FirebaseFirestore.getInstance().collection("personajes").document(id).get()
+        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+          @Override
+          public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
+              DocumentSnapshot document = task.getResult();
+              if (document.exists()) {
+                Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
+                myCallbackPersonaje.onCallback(document.toObject(Personaje.class));
+              } else {
+                Log.d("Usuario", "No such document");
+              }
+            } else {
+              Log.d("Usuario", "get failed with ", task.getException());
+            }
           }
-        }
-      }
-    });
+        });
+    }
+
   }
 
 }

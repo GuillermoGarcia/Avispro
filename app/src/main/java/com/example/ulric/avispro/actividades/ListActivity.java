@@ -33,37 +33,37 @@ public class ListActivity extends AppCompatActivity {
       Toast.makeText(this, "Bienvenido/a, " + this.usuario.getAlias(), Toast.LENGTH_LONG).show();
     }
 
-    usuario.cargarPersonajes(personajes){ }//, new MyCallbackPersonaje() {
-/*    @Override
-      public void onCallback(Personaje personaje) {
-        Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
-      }
-    });*/
-
-    RecyclerView recycler = findViewById(R.id.listActivity);
+    final RecyclerView recycler = findViewById(R.id.listActivity);
 
     LinearLayoutManager manager = new LinearLayoutManager(this);
 
     recycler.setLayoutManager(manager);
 
-    sheetsListAdapter adapter = new sheetsListAdapter(this, R.layout.activity_list_sheet, personajes,
-      new sheetsListAdapter.OnItemClickListener() {
-        @Override
-        public void onItemClick(Personaje character, int position) {
+    usuario.cargarPersonajes(new MyCallbackPersonaje() {
+      @Override
+      public void onCallback(Personaje personaje) {
+        personajes.add(personaje);
+        Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
+        sheetsListAdapter adapter = new sheetsListAdapter(getApplicationContext(), R.layout.activity_list_sheet, personajes,
+          new sheetsListAdapter.OnItemClickListener() {
+          @Override
+          public void onItemClick(Personaje character, int position) {
 
-          Bundle bundle = new Bundle();
-          bundle.putSerializable("personaje", character);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("personaje", character);
+            bundle.putSerializable("usuario", usuario);
 
-          Intent intent = new Intent(ListActivity.this, SheetActivity.class);
-          intent.putExtras(bundle);
-          startActivity(intent);
+            Intent intent = new Intent(ListActivity.this, SheetActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
-        }
+            }
+          }
+        );
+        recycler.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
       }
-
-    );
-
-    recycler.setAdapter(adapter);
+    });
 
   }
 }

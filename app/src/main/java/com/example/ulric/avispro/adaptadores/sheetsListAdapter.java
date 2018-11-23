@@ -90,41 +90,28 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
     private TextView  nivel;
     private TextView  raza;
 
-    public sheetsListHolder(@NonNull View itemView) {
-      super(itemView);
+    public sheetsListHolder(@NonNull View personajeView) {
+      super(personajeView);
 
-      avatar = itemView.findViewById(R.id.iavatar);
-      nombre = itemView.findViewById(R.id.characterName);
-      nivel =  itemView.findViewById(R.id.characterLevel);
-      raza =   itemView.findViewById(R.id.characterRace);
+      avatar = personajeView.findViewById(R.id.iavatar);
+      nombre = personajeView.findViewById(R.id.characterName);
+      nivel =  personajeView.findViewById(R.id.characterLevel);
+      raza =   personajeView.findViewById(R.id.characterRace);
     }
     
     
-    public void bindItem(final Personaje item, final OnItemClickListener listener) {
+    public void bindItem(final Personaje personaje, final OnItemClickListener listener) {
 
-      Log.d("Item Nombre: ",item.getNombre()+"");
-      nombre.setText(item.getNombre());
-      nivel.setText("Nivel "+item.getNivel());
-      raza.setText(item.getRaza() + " (" + item.getCultura() + ")");
-
-
-
-      /* if (item.getAvatar() != ""){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-
-        Picasso.with(contexto)
-            .load("http://image.tmdb.org/t/p/w185" + item.getAvatar())
-            .into(avatar) ;
-
-      } else {
-
-      }*/
+      Log.d("Item Nombre: ",personaje.getNombre()+"");
+      nombre.setText(personaje.getNombre());
+      nivel.setText("Nivel "+personaje.getNivel());
+      raza.setText(personaje.getRaza() + " (" + personaje.getCultura() + ")");
 
 
       itemView.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View v) { listener.onItemClick(item, getAdapterPosition());
-        }
+        public void onClick(View v) { listener.onItemClick(personaje, getAdapterPosition());
+       }
       });
 
     }

@@ -1,11 +1,20 @@
 package com.example.ulric.avispro.modelos;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -63,5 +72,21 @@ public class Personaje implements Serializable {
   public void setProcedencia(String procedencia) { this.procedencia = procedencia; }
   public void setRaza(String raza) { this.raza = raza; }
 
+
+  public void setPersonaje(){
+    FirebaseFirestore.getInstance().collection("personajes").document(this.idPersonaje)
+      .set(this).addOnSuccessListener(new OnSuccessListener<Void>() {
+        @Override
+        public void onSuccess(Void aVoid) {
+          Log.d("Personaje", "Personaje Guardado Exitosamente");
+          }
+        }).addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+            Log.d("Personaje", "Personaje No Guardado Exitosamente");
+            }
+        });
+
+  }
 
 }

@@ -1,9 +1,11 @@
 package com.example.ulric.avispro.actividades;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,18 +13,20 @@ import android.widget.Toast;
 
 import com.example.ulric.avispro.R;
 import com.example.ulric.avispro.modelos.Personaje;
+import com.example.ulric.avispro.modelos.Usuario;
 
 public class SheetActivity extends AppCompatActivity {
 
+  Button    cancelar;
   TextView  cultura;
   TextView  edad;
+  Button    guardar;
   TextView  nombre;
   TextView  nivel;
   TextView  raza;
   Personaje personaje;
   TextView  procedencia;
-  Button    guardar;
-  Button    cancelar;
+  Usuario   usuario;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class SheetActivity extends AppCompatActivity {
     if (bundle != null){
       this.personaje = (Personaje) bundle.getSerializable("personaje");
       Toast.makeText(this, "Bienvenido/a, " + this.personaje.getNombre(), Toast.LENGTH_LONG).show();
+      this.usuario = (Usuario) bundle.getSerializable("usuario");
     }
 
     cultura = findViewById(R.id.culture_sheet);
@@ -55,6 +60,8 @@ public class SheetActivity extends AppCompatActivity {
     guardar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
+        Log.d("SheetActivity","Guardar Pulsado");
+
         personaje.setCultura(cultura.getText().toString().trim());
         personaje.setEdad(Integer.parseInt(edad.getText().toString().trim()));
         personaje.setNombre(nombre.getText().toString().trim());
@@ -62,6 +69,14 @@ public class SheetActivity extends AppCompatActivity {
         personaje.setRaza(raza.getText().toString().trim());
         personaje.setProcedencia(procedencia.getText().toString().trim());
 
+        personaje.setPersonaje();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+
+        Intent intent = new Intent(SheetActivity.this, ListActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
       }
     });
 

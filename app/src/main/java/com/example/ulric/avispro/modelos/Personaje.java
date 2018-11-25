@@ -4,11 +4,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,31 +22,36 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Personaje implements Serializable {
 
   @Expose @SerializedName("avatar") private String avatar;
+  @Expose @SerializedName("caracteristicas") private Map<String, ArrayList<Long>> caracteristicas;
   @Expose @SerializedName("cultura") private String cultura;
   @Expose @SerializedName("edad") private int edad;
-  @Expose @SerializedName("idJugador") private String idJugador;
   @Expose @SerializedName("idPersonaje") private String idPersonaje;
   @Expose @SerializedName("nombre") private String nombre;
   @Expose @SerializedName("nivel") private int nivel;
   @Expose @SerializedName("procedencia") private String procedencia;
   @Expose @SerializedName("raza") private String raza;
 
-  public Personaje() { }
-
-  public Personaje(String avatar, String cultura, int edad, String idJugador, String idPersonaje, String nombre,
+  public Personaje() {
+    this.avatar = "";
+    final ArrayList<Long> min = new ArrayList<Long>() {{ add(0,Long.valueOf("4")); add(1,Long.valueOf("1")); }};
+    this.caracteristicas = new HashMap<String, ArrayList<Long>>() {{
+      put("Agi", min); put("Apa", min); put("Con",  min); put("Des", min);
+      put("Emp", min); put("For", min); put("Inte", min); put("Mem", min);
+      put("Ref", min); put("Per", min); put("Pod",  min); put("Vol", min);
+    }};
+  }
+  public Personaje(String avatar, Map<String, ArrayList<Long>> caracteristicas, String cultura, int edad, String idPersonaje, String nombre,
                    int nivel, String procedencia, String raza) {
     this.avatar = avatar;
+    this.caracteristicas = caracteristicas;
     this.cultura = cultura;
     this.edad = edad;
-    this.idJugador = idJugador;
     this.idPersonaje = idPersonaje;
     this.nombre = nombre;
     this.nivel = nivel;
@@ -53,9 +60,9 @@ public class Personaje implements Serializable {
   }
 
   public String getAvatar() { return avatar; }
+  public Map<String, ArrayList<Long>> getCaracteristicas() { return caracteristicas; }
   public String getCultura() { return cultura; }
   public int getEdad() { return edad; }
-  public String getIdJugador() { return idJugador; }
   public String getIdPersonaje() { return idPersonaje; }
   public String getNombre() { return nombre; }
   public int getNivel() { return nivel; }
@@ -63,9 +70,9 @@ public class Personaje implements Serializable {
   public String getRaza() { return raza; }
 
   public void setAvatar(String avatar) { this.avatar = avatar; }
+  public void setCaracteristicas(Map<String, ArrayList<Long>> caracteristicas) { this.caracteristicas = caracteristicas; }
   public void setCultura(String cultura) { this.cultura = cultura; }
   public void setEdad(int edad) { this.edad = edad; }
-  public void setIdJugador(String idJugador) { this.idJugador = idJugador; }
   public void setIdPersonaje(String idPersonaje) { this.idPersonaje = idPersonaje; }
   public void setNombre(String nombre) { this.nombre = nombre; }
   public void setNivel(int nivel) { this.nivel = nivel; }
@@ -73,20 +80,41 @@ public class Personaje implements Serializable {
   public void setRaza(String raza) { this.raza = raza; }
 
 
-  public void setPersonaje(){
-    FirebaseFirestore.getInstance().collection("personajes").document(this.idPersonaje)
-      .set(this).addOnSuccessListener(new OnSuccessListener<Void>() {
+  public void setPersonaje(final Usuario usuario, final MyCallbackData mcp) {
+    if (this.idPersonaje != null) {
+      FirebaseFirestore.getInstance().collection("personajes").document(this.idPersonaje)
+        .set(this).addOnSuccessListener(new OnSuccessListener<Void>() {
         @Override
         public void onSuccess(Void aVoid) {
           Log.d("Personaje", "Personaje Guardado Exitosamente");
-          }
-        }).addOnFailureListener(new OnFailureListener() {
+          mcp.onCallbackData(new Personaje());
+        }
+      }).addOnFailureListener(new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+          Log.d("Personaje", "Personaje No Guardado Exitosamente");
+          mcp.onCallbackData(new Personaje());
+        }
+      });
+    } else {
+      FirebaseFirestore.getInstance().collection("personajes").add(this)
+        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
           @Override
-          public void onFailure(@NonNull Exception e) {
-            Log.d("Personaje", "Personaje No Guardado Exitosamente");
-            }
+          public void onSuccess(DocumentReference documentReference) {
+            String id = documentReference.getId();
+            FirebaseFirestore.getInstance().collection("personajes")
+              .document(id).update("idPersonaje", id);
+            usuario.setPersonaje(id);
+            Log.d("Personaje", "Personaje Nuevo Guardado Exitosamente");
+            mcp.onCallbackData(new Personaje());
+          }
         });
+    }
+  }
 
+  public void deletePersonaje(){
+    FirebaseFirestore.getInstance().collection("personajes")
+      .document(this.idPersonaje).delete();
   }
 
 }

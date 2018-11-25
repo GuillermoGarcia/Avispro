@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                       // Creamos un objeto de tipo Bundle
                       Bundle bundle = new Bundle();
                       bundle.putSerializable("usuario", usuario);
+                      bundle.putBoolean("notificar", false);
 
                       // Asociamos el Bundle al Intent
                       intent.putExtras(bundle);

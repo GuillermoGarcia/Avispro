@@ -32,5 +32,6 @@
   <string name="hint_culture_sheet">Cultura del Personaje</string>
   <string name="hint_origin_sheet">Procedencia del Personaje</string>
   <string name="hint_level_sheet">Nivel del Personaje</string>
+  <string name="character_delete">Borrar Personaje</string>
 
 </resources>

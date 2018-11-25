@@ -6,37 +6,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.example.ulric.avispro.R;
 import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.example.ulric.avispro.modelos.Personaje;
 import com.example.ulric.avispro.modelos.Usuario;
 
-public class SheetActivity extends AppCompatActivity {
+public class AddSheetActivity extends AppCompatActivity {
 
-  Button    cancelar;
+  private Usuario usuario;
+  private Personaje personaje = new Personaje();
+
+  Button  cancelar;
   TextView  cultura;
   TextView  edad;
   Button    guardar;
   TextView  nombre;
   TextView  nivel;
   TextView  raza;
-  Personaje personaje;
   TextView  procedencia;
-  Usuario   usuario;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_sheet);
+    setContentView(R.layout.activity_add_sheet);
 
     Bundle bundle = getIntent().getExtras();
-    if (bundle != null){
-      this.personaje = (Personaje) bundle.getSerializable("personaje");
+    if (bundle != null)
       this.usuario = (Usuario) bundle.getSerializable("usuario");
-    }
 
     cultura = findViewById(R.id.culture_sheet);
     edad = findViewById(R.id.age_sheet);
@@ -46,19 +47,10 @@ public class SheetActivity extends AppCompatActivity {
     procedencia = findViewById(R.id.origin_sheet);
     guardar = findViewById(R.id.save_button);
 
-    if (personaje != null) {
-      cultura.setText(personaje.getCultura());
-      edad.setText(personaje.getEdad()+"");
-      nombre.setText(personaje.getNombre());
-      nivel.setText(personaje.getNivel()+"");
-      raza.setText(personaje.getRaza());
-      procedencia.setText(personaje.getProcedencia());
-    }
-
     guardar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Log.d("SheetActivity","Guardar Pulsado");
+        Log.d("AddSheetActivity","Guardar Pulsado");
 
         personaje.setCultura(cultura.getText().toString().trim());
         personaje.setEdad(Integer.parseInt(edad.getText().toString().trim()));
@@ -74,14 +66,12 @@ public class SheetActivity extends AppCompatActivity {
             bundle.putSerializable("usuario", usuario);
             bundle.putBoolean("notificar", true);
 
-            Intent intent = new Intent(SheetActivity.this, ListActivity.class);
+            Intent intent = new Intent(AddSheetActivity.this, ListActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
           }
         });
-
       }
     });
-
   }
 }

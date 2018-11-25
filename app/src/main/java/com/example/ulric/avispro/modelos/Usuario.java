@@ -1,29 +1,21 @@
 package com.example.ulric.avispro.modelos;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.ulric.avispro.interfaces.MyCallbackPersonaje;
+import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
 
 public class Usuario implements Serializable {
     @Expose @SerializedName("idUsuario") private String idUsuario;
@@ -53,9 +45,24 @@ public class Usuario implements Serializable {
   public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
   public void setPersonajes(List<String> personajes) { this.personajes = personajes; }
 
+  public void setPersonaje(String id){
+    this.personajes.add(id);
+    FirebaseFirestore.getInstance().collection("usuarios")
+      .document(idUsuario).update("personajes", this.personajes)
+      .addOnSuccessListener(new OnSuccessListener<Void>() {
+        @Override
+        public void onSuccess(Void aVoid) {
+          Log.d("UsuarioClass", "Lista de Personajes Actualizada.");
+        }
+      }).addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception e) {
+        Log.d("UsuarioClass", "Error en Actualización Lista de Personajes.", e);
+      }
+    });
+  }
 
-
-  public void cargarPersonajes(final MyCallbackPersonaje myCallbackPersonaje){
+  public void cargarPersonajes(final MyCallbackData mcp){
 
     List<String> idPersonajes = this.getPersonajes();
     for (final String id : idPersonajes) {
@@ -67,7 +74,7 @@ public class Usuario implements Serializable {
               DocumentSnapshot document = task.getResult();
               if (document.exists()) {
                 Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
-                myCallbackPersonaje.onCallback(document.toObject(Personaje.class));
+                mcp.onCallbackData(document.toObject(Personaje.class));
               } else {
                 Log.d("Usuario", "No such document");
               }
@@ -79,6 +86,8 @@ public class Usuario implements Serializable {
     }
 
   }
+
+  public void salir(){ FirebaseAuth.getInstance().signOut(); }
 
 }
 

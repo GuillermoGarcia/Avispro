@@ -4,13 +4,17 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ulric.avispro.R;
+import com.example.ulric.avispro.actividades.ListActivity;
 import com.example.ulric.avispro.modelos.Personaje;
 
 import java.util.List;
@@ -83,7 +87,8 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
     return this.data.size() ;
   }
 
-  public class sheetsListHolder extends RecyclerView.ViewHolder {
+  public class sheetsListHolder extends RecyclerView.ViewHolder
+      implements View.OnCreateContextMenuListener {
 
     private ImageView avatar;
     private TextView  nombre;
@@ -97,6 +102,8 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
       nombre = personajeView.findViewById(R.id.characterName);
       nivel =  personajeView.findViewById(R.id.characterLevel);
       raza =   personajeView.findViewById(R.id.characterRace);
+
+      personajeView.setOnCreateContextMenuListener(this) ;
     }
     
     
@@ -107,13 +114,27 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
       nivel.setText("Nivel "+personaje.getNivel());
       raza.setText(personaje.getRaza() + " (" + personaje.getCultura() + ")");
 
-
       itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) { listener.onItemClick(personaje, getAdapterPosition());
        }
       });
 
+    }
+
+    /**
+     * Crea un menú contextual asociado a cada uno de los ítems
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+      //
+      //super.onCreateContextMenu(menu, v, menuInfo);
+      //MenuInflater inflater = ((ListActivity) contexto).getMenuInflater();
+      //inflater.inflate(R.menu.character_menu, menu);
+      menu.add(this.getAdapterPosition(), 1, 0, R.string.character_delete);
     }
   }
 
@@ -124,5 +145,11 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
    */
   public interface OnItemClickListener {
     void onItemClick(Personaje character, int position) ;
+  }
+
+  public void borrarPersonaje(int id){
+    data.get(id).deletePersonaje();
+    data.remove(id);
+    notifyDataSetChanged();
   }
 }

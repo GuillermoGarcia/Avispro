@@ -129,18 +129,20 @@ public class ListActivity extends AppCompatActivity {
       case R.id.characterDelete:
         View view = getLayoutInflater().inflate(R.layout.dialog_delete_character, null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
-        builder.setTitle(R.string.character_delete + personajes.get(adapter.getPosition()).getNombre())
-          .setView(view).setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            //adapter.borrarPersonaje(item.getGroupId());
-            Toast.makeText(ListActivity.this, R.string.character_delete + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
-          }
-        })
+        String title = getText(R.string.character_delete) + " " +  personajes.get(adapter.getPosition()).getNombre();
+        builder.setTitle(title).setView(view)
           .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) { }
-          });
+          })
+
+          .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              //adapter.borrarPersonaje(item.getGroupId());
+              Toast.makeText(ListActivity.this, getText(R.string.character_delete) + " " + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
+            }
+          }).show();
         break ;
 
       default:

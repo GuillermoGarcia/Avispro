@@ -25,8 +25,8 @@
   <string name="hint_origin_sheet">Character\'s Origin</string>
   <string name="hint_level_sheet">Character\'s Level</string>
   <string name="character_delete">Delete Character</string>
-  <string name="dialog_accept">Acept</string>
+  <string name="dialog_accept">Accept</string>
   <string name="dialog_cancel">Cancel</string>
   <string name="dialog_confirm">Confirm</string>
-  <string name="dialog_delete_text">Are you sure to want delete this character?</string>
+  <string name="dialog_delete_text">Are you sure you want to delete the character?</string>
 </resources>

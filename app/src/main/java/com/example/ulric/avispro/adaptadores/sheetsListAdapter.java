@@ -4,17 +4,13 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ulric.avispro.R;
-import com.example.ulric.avispro.actividades.ListActivity;
 import com.example.ulric.avispro.modelos.Personaje;
 
 import java.util.List;
@@ -26,6 +22,8 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
   private OnItemClickListener listener;
 
   private Context contexto;
+
+  private int position;
 
 
   public sheetsListAdapter(Context contexto, int layout, List<Personaje> data, OnItemClickListener listener) {
@@ -87,8 +85,9 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
     return this.data.size() ;
   }
 
-  public class sheetsListHolder extends RecyclerView.ViewHolder
-      implements View.OnCreateContextMenuListener {
+  public int getPosition(){ return this.position; }
+
+  public class sheetsListHolder extends RecyclerView.ViewHolder {
 
     private ImageView avatar;
     private TextView  nombre;
@@ -103,7 +102,14 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
       nivel =  personajeView.findViewById(R.id.characterLevel);
       raza =   personajeView.findViewById(R.id.characterRace);
 
-      personajeView.setOnCreateContextMenuListener(this) ;
+      personajeView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+          position = getAdapterPosition();
+          return false;
+        }
+      });
+
     }
     
     
@@ -122,20 +128,6 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
 
     }
 
-    /**
-     * Crea un menú contextual asociado a cada uno de los ítems
-     * @param menu
-     * @param v
-     * @param menuInfo
-     */
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-      //
-      //super.onCreateContextMenu(menu, v, menuInfo);
-      //MenuInflater inflater = ((ListActivity) contexto).getMenuInflater();
-      //inflater.inflate(R.menu.character_menu, menu);
-      menu.add(this.getAdapterPosition(), 1, 0, R.string.character_delete);
-    }
   }
 
   /**

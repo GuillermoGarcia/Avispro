@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -95,6 +97,22 @@ public class ListActivity extends AppCompatActivity {
   }
 
   /**
+   * Crea un menú contextual asociado a cada uno de los ítems
+   * @param menu
+   * @param v
+   * @param menuInfo
+   */
+  @Override
+  public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    //
+    super.onCreateContextMenu(menu, v, menuInfo);
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.character_menu, menu);
+
+    //menu.add(this.getAdapterPosition(), 1, 0, R.string.character_delete);
+  }
+
+  /**
    * Nos permite realizar las acciones correspondientes a cada opción del menú contextual.
    * @param item
    * @return
@@ -102,11 +120,10 @@ public class ListActivity extends AppCompatActivity {
   @Override
   public boolean onContextItemSelected(MenuItem item) {
 
-    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
     switch(item.getItemId()) {
-      case 1:
-        adapter.borrarPersonaje(item.getGroupId());
-        Toast.makeText(this, "Borrar Personaje, " + item.getGroupId(), Toast.LENGTH_SHORT).show();
+      case R.id.characterDelete:
+        //adapter.borrarPersonaje(item.getGroupId());
+        Toast.makeText(this, "Borrar Personaje, " + adapter.getPosition(), Toast.LENGTH_SHORT).show();
         break ;
 
       default:

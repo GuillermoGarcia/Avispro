@@ -1,10 +1,14 @@
 package com.example.ulric.avispro.actividades;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ulric.avispro.R;
@@ -77,7 +82,7 @@ public class ListActivity extends AppCompatActivity {
       public void onCallbackData(Personaje personaje) {
         personajes.add(personaje);
         Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
-        adapter.notifyDataSetChanged();
+        adapter.notifyItemInserted(personajes.size() - 1);
       }
     });
 
@@ -122,8 +127,20 @@ public class ListActivity extends AppCompatActivity {
 
     switch(item.getItemId()) {
       case R.id.characterDelete:
-        //adapter.borrarPersonaje(item.getGroupId());
-        Toast.makeText(this, "Borrar Personaje, " + adapter.getPosition(), Toast.LENGTH_SHORT).show();
+        View view = getLayoutInflater().inflate(R.layout.dialog_delete_character, null, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
+        builder.setTitle(R.string.character_delete + personajes.get(adapter.getPosition()).getNombre())
+          .setView(view).setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            //adapter.borrarPersonaje(item.getGroupId());
+            Toast.makeText(ListActivity.this, R.string.character_delete + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
+          }
+        })
+          .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }
+          });
         break ;
 
       default:

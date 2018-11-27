@@ -34,4 +34,11 @@
   <string name="hint_level_sheet">Nivel del Personaje</string>
   <string name="character_delete">Borrar Personaje</string>
 
+  <!-- Dialog -->
+  <string name="dialog_accept">Aceptar</string>
+  <string name="dialog_cancel">Cancelar</string>
+  <string name="dialog_confirm">Confirmar</string>
+  <!-- Dialog Delete Character-->
+  <string name="dialog_delete_text">¿Realmente desea borrar este personaje?</string>
+
 </resources>

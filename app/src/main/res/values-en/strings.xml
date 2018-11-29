@@ -29,4 +29,13 @@
   <string name="dialog_cancel">Cancel</string>
   <string name="dialog_confirm">Confirm</string>
   <string name="dialog_delete_text">Are you sure you want to delete the character?</string>
+  <string name="setting_title">USER\'S DATA</string>
+  <string name="hint_new_password_r">Repeat New Password</string>
+  <string name="hint_new_password">New Password</string>
+  <string name="min_password">Password must be at least 6 characters.</string>
+  <string name="wrong_password">Wrong password.</string>
+  <string name="dialog_ok">OK</string>
+  <string name="dialog_save_user">Correctly Stored User Data</string>
+  <string name="equal_password">The new Password does not match the repeated Password.</string>
+  <string name="save_button">SAVE</string>
 </resources>

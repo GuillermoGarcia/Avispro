@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".actividades.SettingActivity">
+
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <TextView
+        android:id="@+id/title"
+        android:layout_width="302dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/setting_title"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/avispro" />
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_usuario"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:counterTextAppearance="@style/counterText"
+        app:counterOverflowTextAppearance="@style/counterOverride">
+
+        <EditText
+          android:id="@+id/etUsuario"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:ems="10"
+          android:hint="@string/hint_email"
+          android:inputType="textEmailAddress" />
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_contrasena"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_usuario"
+        app:counterTextAppearance="@style/counterText"
+        app:counterOverflowTextAppearance="@style/counterOverride">
+
+        <EditText
+          android:id="@+id/etContrasena"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:hint="@string/hint_password"
+          android:inputType="textPassword" />
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_nueva_contrasena"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_contrasena"
+        app:counterTextAppearance="@style/counterText"
+        app:counterOverflowTextAppearance="@style/counterOverride">
+
+      <EditText
+        android:id="@+id/etNuevaContrasena"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="@string/hint_new_password"
+        android:inputType="textPassword" />
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_nueva_contrasena_r"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_nueva_contrasena"
+        app:counterTextAppearance="@style/counterText"
+        app:counterOverflowTextAppearance="@style/counterOverride">
+
+      <EditText
+          android:id="@+id/etNuevaContrasenaR"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:hint="@string/hint_new_password_r"
+          android:inputType="textPassword" />
+
+      </android.support.design.widget.TextInputLayout>
+
+      <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_alias"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_nueva_contrasena_r"
+        app:counterTextAppearance="@style/counterText"
+        app:counterOverflowTextAppearance="@style/counterOverride">
+
+      <EditText
+          android:id="@+id/etAlias"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_centerHorizontal="true"
+          android:layout_centerVertical="true"
+          android:hint="@string/hint_alias"
+          android:inputType="textPersonName" />
+
+      </android.support.design.widget.TextInputLayout>
+
+      <Button
+        android:id="@+id/boton_save"
+        android:layout_width="302dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
+        android:hint="@string/save_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_alias" />
+
+      <Button
+        android:id="@+id/boton_cancel"
+        android:layout_width="302dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/boton_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/boton_save" />
+
+    </android.support.constraint.ConstraintLayout>
+  </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

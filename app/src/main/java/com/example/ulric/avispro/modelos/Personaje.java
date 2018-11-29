@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Personaje implements Serializable {
+public class Personaje implements Serializable, Comparable {
 
   @Expose @SerializedName("avatar") private String avatar;
   @Expose @SerializedName("caracteristicas") private Map<String, ArrayList<Long>> caracteristicas;
@@ -117,4 +117,13 @@ public class Personaje implements Serializable {
       .document(this.idPersonaje).delete();
   }
 
+  @Override
+  public int compareTo(Object o) {
+    if (o.getClass() == this.getClass()) {
+      Personaje p = (Personaje) o;
+      return this.nombre.compareTo(p.getNombre());
+    } else {
+      return -1;
+    }
+  }
 }

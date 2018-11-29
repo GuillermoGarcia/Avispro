@@ -3,8 +3,11 @@ package com.example.ulric.avispro.actividades;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,14 +37,16 @@ public class LoginActivity extends AppCompatActivity {
     btnLogin = findViewById(R.id.boton_login);
     btnRegister = findViewById(R.id.boton_register);
 
-    usu = findViewById(R.id.label_usuario);
-    pas = findViewById(R.id.label_contrasena);
+    usu = findViewById(R.id.etUsuario);
+    pas = findViewById(R.id.etContrasena);
 
     Bundle bundle = getIntent().getExtras();
     if (bundle != null){
       String usuario = bundle.getString("usuario");
       usu.setText(usuario);
     }
+
+    setupFloatingLabelError();
 
     btnRegister.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -122,9 +127,44 @@ public class LoginActivity extends AppCompatActivity {
       }).addOnFailureListener(new OnFailureListener() {
           @Override
           public void onFailure(@NonNull Exception e) {
+            TextInputLayout tilUsuario = findViewById(R.id.til_correo);
+            TextInputLayout tilContrasena = findViewById(R.id.til_contrasena);
+            tilUsuario.setError(getString(R.string.wrong_login));
+            tilContrasena.setError(getString(R.string.wrong_login));
+            tilUsuario.setErrorEnabled(true);
+            tilContrasena.setErrorEnabled(true);
             Toast.makeText(LoginActivity.this, R.string.wrong_login, Toast.LENGTH_LONG).show();
           }
       });
 
+  }
+
+  private void setupFloatingLabelError() {
+    final TextInputLayout tilUsuario = findViewById(R.id.til_correo);
+    final TextInputLayout tilContrasena = findViewById(R.id.til_contrasena);
+    tilContrasena.getEditText().addTextChangedListener(new TextWatcher() {
+      // ...
+      @Override
+      public void onTextChanged(CharSequence text, int start, int count, int after) {
+        tilUsuario.setErrorEnabled(false);
+        tilContrasena.setErrorEnabled(false);
+      }
+
+      @Override
+      public void beforeTextChanged(CharSequence s, int start, int count,
+                                    int after) {
+        // TODO Auto-generated method stub
+      }
+
+      @Override
+      public void afterTextChanged(Editable s) {
+        if (s.length() > 0 && s.length() < 6) {
+          tilContrasena.setError(getString(R.string.min_password));
+          tilContrasena.setErrorEnabled(true);
+        } else {
+          tilContrasena.setErrorEnabled(false);
+        }
+      }
+    });
   }
 }

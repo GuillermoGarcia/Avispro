@@ -9,7 +9,9 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".actividades.LoginActivity" android:launchMode="singleTask">
+    <activity
+      android:name=".actividades.LoginActivity"
+      android:launchMode="singleTask">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +22,7 @@
     <activity android:name=".actividades.RegisterActivity" />
     <activity android:name=".actividades.ListSheetActivity" />
     <activity android:name=".actividades.SheetActivity" />
-    <activity android:name=".actividades.AddSheetActivity"></activity>
+    <activity android:name=".actividades.SettingActivity" />
   </application>
 
 </manifest>

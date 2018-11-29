@@ -45,8 +45,7 @@ public class Usuario implements Serializable {
   public void setIdUsuario(String idUsuario) { this.idUsuario = idUsuario; }
   public void setPersonajes(List<String> personajes) { this.personajes = personajes; }
 
-  public void setPersonaje(String id){
-    this.personajes.add(id);
+  private void actualizarListaPersonaje(){
     FirebaseFirestore.getInstance().collection("usuarios")
       .document(idUsuario).update("personajes", this.personajes)
       .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -57,34 +56,42 @@ public class Usuario implements Serializable {
       }).addOnFailureListener(new OnFailureListener() {
       @Override
       public void onFailure(@NonNull Exception e) {
-        Log.d("UsuarioClass", "Error en Actualización Lista de Personajes.", e);
-      }
+      Log.d("UsuarioClass", "Error en Actualización Lista de Personajes.", e);
+    }
     });
   }
 
-  public void cargarPersonajes(final MyCallbackData mcp){
+  public void deletePersonaje(String id) {
+    this.personajes.remove(id);
+    this.actualizarListaPersonaje();
+  }
 
+  public void setPersonaje(String id){
+    this.personajes.add(id);
+    actualizarListaPersonaje();
+  }
+
+  public void cargarPersonajes(final MyCallbackData mcp){
     List<String> idPersonajes = this.getPersonajes();
     for (final String id : idPersonajes) {
       FirebaseFirestore.getInstance().collection("personajes").document(id).get()
         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
           @Override
           public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-            if (task.isSuccessful()) {
-              DocumentSnapshot document = task.getResult();
-              if (document.exists()) {
-                Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
-                mcp.onCallbackData(document.toObject(Personaje.class));
-              } else {
-                Log.d("Usuario", "No such document");
-              }
+          if (task.isSuccessful()) {
+            DocumentSnapshot document = task.getResult();
+            if (document.exists()) {
+              Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
+              mcp.onCallbackData(document.toObject(Personaje.class));
             } else {
-              Log.d("Usuario", "get failed with ", task.getException());
+              Log.d("Usuario", "No such document");
             }
+          } else {
+            Log.d("Usuario", "get failed with ", task.getException());
+          }
           }
         });
     }
-
   }
 
   public void salir(){ FirebaseAuth.getInstance().signOut(); }

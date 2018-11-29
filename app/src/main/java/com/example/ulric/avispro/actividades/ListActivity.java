@@ -28,106 +28,109 @@ import com.example.ulric.avispro.modelos.Personaje;
 import com.example.ulric.avispro.modelos.Usuario;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-  private final List<Personaje> personajes = new ArrayList<>();
+  private final List<Personaje> personajes = Collections.synchronizedList(new ArrayList<Personaje>());
   private Usuario usuario;
   private FloatingActionButton fab;
   private sheetsListAdapter adapter = null;
-  private Boolean notificar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_list);
 
+    // Recogemos los datos de usuario pasados de una actividad anterior
     Bundle bundle = getIntent().getExtras();
-    if (bundle != null) {
+    if (bundle != null)
       this.usuario = (Usuario) bundle.getSerializable("usuario");
-      this.notificar = bundle.getBoolean("notificar");
-    }
 
+    // Modificamos el ActionBar
     getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME|ActionBar.DISPLAY_SHOW_TITLE);
-    //getSupportActionBar().setIcon(R.mipmap.ic_flixnet);
     getSupportActionBar().setSubtitle("Tus Personajes");
 
-    final RecyclerView recycler = findViewById(R.id.listActivity);
-
-    LinearLayoutManager manager = new LinearLayoutManager(this);
-
+    // Creamos el adaptador que se manejara el listado de Personajes
     adapter = new sheetsListAdapter(this, R.layout.activity_list_sheet, personajes,
       new sheetsListAdapter.OnItemClickListener() {
         @Override
         public void onItemClick(Personaje character, int position) {
+        // Pulsando sobre un personaje vamos a la Actividad que mostrara
+        // los datos de dicho personaje
         Bundle bundle = new Bundle();
         bundle.putSerializable("personaje", character);
         bundle.putSerializable("usuario", usuario);
-
         Intent intent = new Intent(ListActivity.this, SheetActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-
         }
       }
     );
-    recycler.setLayoutManager(manager);
+
+    // Refenrenciamos el RecyclerView y le asignamos el manejador del Layout y el adaptador
+    final RecyclerView recycler = findViewById(R.id.listActivity);
+    recycler.setLayoutManager(new LinearLayoutManager(this));
     recycler.setAdapter(adapter);
 
+    // Registramos el RecyclerView para tener acceso al menú contextual
     registerForContextMenu(recycler);
 
+    // Cargamos los personajes del usuario
     usuario.cargarPersonajes(new MyCallbackData() {
       @Override
       public void onCallbackData(Personaje personaje) {
         personajes.add(personaje);
+        Collections.sort(personajes);
         Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
         adapter.notifyItemInserted(personajes.size() - 1);
       }
     });
 
+    // Referenciamos el botón flotante y le asignamos un listener
     fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("usuario", usuario);
-
-        Intent intent = new Intent(ListActivity.this, AddSheetActivity.class);
+        Intent intent = new Intent(ListActivity.this, SheetActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-
       }
     });
   }
 
   /**
    * Crea un menú contextual asociado a cada uno de los ítems
-   * @param menu
-   * @param v
-   * @param menuInfo
+   * @param menu, referencia al menú contextual
+   * @param v, referencia a la vista desde la que se ha lanzado el menú contextual
+   * @param menuInfo, información del menú contextual
    */
   @Override
   public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-    //
+    // Le pasamos los datos al superior
     super.onCreateContextMenu(menu, v, menuInfo);
+    // Inflamos el layout del menú Contextual
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.character_menu, menu);
-
-    //menu.add(this.getAdapterPosition(), 1, 0, R.string.character_delete);
   }
 
   /**
    * Nos permite realizar las acciones correspondientes a cada opción del menú contextual.
-   * @param item
+   * @param item, opción del menú pulsada
    * @return
    */
   @Override
-  public boolean onContextItemSelected(MenuItem item) {
+  public boolean onContextItemSelected(final MenuItem item) {
 
     switch(item.getItemId()) {
       case R.id.characterDelete:
-        View view = getLayoutInflater().inflate(R.layout.dialog_delete_character, null, false);
+        // Creamos un dialogo para confirmar que se desea borrar el personaje
+        View view = getLayoutInflater().inflate(R.layout.dialog_delete_character,
+                                           null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
         String title = getText(R.string.character_delete) + " " +  personajes.get(adapter.getPosition()).getNombre();
         builder.setTitle(title).setView(view)
@@ -135,12 +138,11 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) { }
           })
-
           .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-              //adapter.borrarPersonaje(item.getGroupId());
-              Toast.makeText(ListActivity.this, getText(R.string.character_delete) + " " + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
+              adapter.borrarPersonaje(adapter.getPosition(), usuario);
+              //Toast.makeText(ListActivity.this, getText(R.string.character_delete) + " " + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
             }
           }).show();
         break ;
@@ -155,7 +157,7 @@ public class ListActivity extends AppCompatActivity {
 
   /**
    * @param menu, menu de la actividad
-   * @return super, llamamos al padre.
+   * @return super, regresamos la llamada al superior.
    */
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -166,7 +168,7 @@ public class ListActivity extends AppCompatActivity {
   }
 
   /**
-   * @param item
+   * @param item, opción del menú seleccionada
    * @return
    */
   @Override
@@ -177,8 +179,15 @@ public class ListActivity extends AppCompatActivity {
 
       case R.id.appExit:
         usuario.salir();
-        Intent intent = new Intent(ListActivity.this, LoginActivity.class);
-        startActivity(intent);
+        Intent salir = new Intent(ListActivity.this, LoginActivity.class);
+        startActivity(salir);
+        break ;
+      case R.id.userEdit:
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+        Intent settings = new Intent(ListActivity.this, SettingActivity.class);
+        settings.putExtras(bundle);
+        startActivity(settings);
         break ;
 
       default :

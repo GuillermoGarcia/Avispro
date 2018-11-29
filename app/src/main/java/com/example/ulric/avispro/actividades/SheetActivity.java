@@ -14,18 +14,15 @@ import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.example.ulric.avispro.modelos.Personaje;
 import com.example.ulric.avispro.modelos.Usuario;
 
+import static java.lang.String.valueOf;
+
 public class SheetActivity extends AppCompatActivity {
 
-  Button    cancelar;
-  TextView  cultura;
-  TextView  edad;
-  Button    guardar;
-  TextView  nombre;
-  TextView  nivel;
-  TextView  raza;
-  Personaje personaje;
-  TextView  procedencia;
-  Usuario   usuario;
+  private Personaje personaje;
+  private Usuario   usuario;
+
+  Button    cancelar, guardar;
+  TextView  cultura, edad, nombre, nivel, raza, procedencia;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +35,24 @@ public class SheetActivity extends AppCompatActivity {
       this.usuario = (Usuario) bundle.getSerializable("usuario");
     }
 
-    cultura = findViewById(R.id.culture_sheet);
-    edad = findViewById(R.id.age_sheet);
-    nombre = findViewById(R.id.name_sheet);
-    nivel = findViewById(R.id.level_sheet);
-    raza = findViewById(R.id.race_sheet);
-    procedencia = findViewById(R.id.origin_sheet);
+    cultura = findViewById(R.id.etCultureCharacter);
+    edad = findViewById(R.id.etAgeCharacter);
+    nombre = findViewById(R.id.etNameCharacter);
+    nivel = findViewById(R.id.etLevelCharacter);
+    raza = findViewById(R.id.etRaceCharacter);
+    procedencia = findViewById(R.id.etOriginCharacter);
     guardar = findViewById(R.id.save_button);
+    cancelar = findViewById(R.id.cancel_button);
 
     if (personaje != null) {
       cultura.setText(personaje.getCultura());
-      edad.setText(personaje.getEdad()+"");
+      edad.setText(valueOf(personaje.getEdad()));
       nombre.setText(personaje.getNombre());
-      nivel.setText(personaje.getNivel()+"");
+      nivel.setText(valueOf(personaje.getNivel()));
       raza.setText(personaje.getRaza());
       procedencia.setText(personaje.getProcedencia());
+    } else {
+      personaje = new Personaje();
     }
 
     guardar.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,6 @@ public class SheetActivity extends AppCompatActivity {
           public void onCallbackData(Personaje personaje) {
             Bundle bundle = new Bundle();
             bundle.putSerializable("usuario", usuario);
-            bundle.putBoolean("notificar", true);
 
             Intent intent = new Intent(SheetActivity.this, ListActivity.class);
             intent.putExtras(bundle);
@@ -80,6 +79,17 @@ public class SheetActivity extends AppCompatActivity {
           }
         });
 
+      }
+    });
+
+    cancelar.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+        Intent intent = new Intent(SheetActivity.this, ListActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
       }
     });
 

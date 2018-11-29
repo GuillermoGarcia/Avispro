@@ -34,11 +34,26 @@
   <string name="hint_level_sheet">Nivel del Personaje</string>
   <string name="character_delete">Borrar Personaje</string>
 
+  <!-- Setting Activity -->
+  <string name="setting_title">DATOS DEL USUARIO</string>
+  <string name="hint_new_password">Nueva Contraseña</string>
+  <string name="hint_new_password_r">Repetir Nueva Contraseña</string>
+  <string name="wrong_password">Contraseña Incorrecta.</string>
+  <string name="min_password">La Contraseña debe tener al menos 6 carácteres.</string>
+  <string name="equal_password">La nueva Contraseña no coincide con la repetida.</string>
+  <string name="save_button">GUARDAR</string>
+
+
   <!-- Dialog -->
   <string name="dialog_accept">Aceptar</string>
+  <string name="dialog_ok">Entendido</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_confirm">Confirmar</string>
-  <!-- Dialog Delete Character-->
+
+  <!-- Dialog Delete Character -->
   <string name="dialog_delete_text">¿Realmente desea borrar este personaje?</string>
+
+  <!-- Dialog Save User -->
+  <string name="dialog_save_user">Datos de Usuario Guardados Correctamente</string>
 
 </resources>

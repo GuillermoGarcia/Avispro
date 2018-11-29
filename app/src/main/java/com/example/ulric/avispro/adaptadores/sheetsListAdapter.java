@@ -1,19 +1,30 @@
 package com.example.ulric.avispro.adaptadores;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Constraints;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ulric.avispro.R;
+import com.example.ulric.avispro.actividades.ListActivity;
 import com.example.ulric.avispro.modelos.Personaje;
+import com.example.ulric.avispro.modelos.Usuario;
 
 import java.util.List;
+
+import io.grpc.internal.SharedResourceHolder;
 
 public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sheetsListHolder> {
 
@@ -45,6 +56,7 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
   @NonNull
   @Override
   public sheetsListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+
 
     // Obtenemos en primer lugar el inflador, que necesitará conocer el contexto
     // en el que vamos a inyectar los elementos de nuestro layout.
@@ -94,13 +106,32 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
     private TextView  nivel;
     private TextView  raza;
 
-    public sheetsListHolder(@NonNull View personajeView) {
+    public sheetsListHolder(@NonNull final View personajeView) {
       super(personajeView);
 
       avatar = personajeView.findViewById(R.id.iavatar);
       nombre = personajeView.findViewById(R.id.characterName);
       nivel =  personajeView.findViewById(R.id.characterLevel);
       raza =   personajeView.findViewById(R.id.characterRace);
+
+      //
+      final ConstraintLayout layout = personajeView.findViewById(R.id.characterData);
+      float dp = 33f;
+      Resources r = contexto.getResources();
+      DisplayMetrics metrics = r.getDisplayMetrics();
+      final float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+      final ViewTreeObserver observer= layout.getViewTreeObserver();
+      final ViewTreeObserver.OnGlobalLayoutListener vto = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+          if (raza.getWidth() != (layout.getWidth() - avatar.getWidth() - (int)px)) {
+            raza.setWidth(layout.getWidth() - avatar.getWidth() - (int)px);
+            Log.d("Log", "Width: " + raza.getWidth() + " - Width: " + (layout.getWidth() - avatar.getWidth()));
+          }
+        }
+      };
+
+      observer.addOnGlobalLayoutListener(vto);
 
       personajeView.setOnLongClickListener(new View.OnLongClickListener() {
         @Override
@@ -139,7 +170,8 @@ public class sheetsListAdapter extends RecyclerView.Adapter<sheetsListAdapter.sh
     void onItemClick(Personaje character, int position) ;
   }
 
-  public void borrarPersonaje(int id){
+  public void borrarPersonaje(int id, Usuario usuario){
+    usuario.deletePersonaje(data.get(id).getIdPersonaje());
     data.get(id).deletePersonaje();
     data.remove(id);
     notifyDataSetChanged();

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:clickable="true"
+  android:focusable="true"
+  card_view:cardElevation="8dp"
+  card_view:cardCornerRadius="2dp"
+  card_view:cardUseCompatPadding="true"
+  android:id="@+id/skillCard">
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/skillData"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+      android:id="@+id/skillName"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="20dp"
+      android:textSize="28sp"
+      card_view:layout_constraintStart_toStartOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/skillBase"
+      android:gravity="bottom"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_base"
+      android:textSize="16sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toStartOf="parent"
+      card_view:layout_constraintEnd_toStartOf="@id/skillBaseValue" />
+
+    <TextView
+      android:id="@+id/skillBaseValue"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="20sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintEnd_toStartOf="@id/skillPrimaryBonus"
+      card_view:layout_constraintStart_toEndOf="@id/skillBase" />
+
+    <TextView
+      android:id="@+id/skillPrimaryBonus"
+      android:gravity="bottom"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_primary_bonus"
+      android:textSize="16sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintEnd_toStartOf="@id/skillPrimaryBonusValue"
+      card_view:layout_constraintStart_toEndOf="@id/skillBaseValue" />
+
+    <TextView
+      android:id="@+id/skillPrimaryBonusValue"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="20sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toEndOf="@id/skillPrimaryBonus"
+      card_view:layout_constraintEnd_toStartOf="@id/skillSecundaryBonus" />
+
+    <TextView
+      android:id="@+id/skillSecundaryBonus"
+      android:gravity="bottom"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_secundary_bonus"
+      android:textSize="16sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toEndOf="@id/skillPrimaryBonusValue"
+      card_view:layout_constraintEnd_toStartOf="@id/skillSecundaryBonusValue"/>
+
+    <TextView
+      android:id="@+id/skillSecundaryBonusValue"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="20sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toEndOf="@id/skillSecundaryBonus"
+      card_view:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="8dp"
+      android:gravity="bottom|end"
+      android:text="@string/skill_total"
+      android:textSize="22sp"
+      card_view:layout_constraintEnd_toStartOf="@id/skillTotalValue"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/skillTotalValue"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginTop="20dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="bottom|end"
+      android:textSize="22sp"
+      card_view:layout_constraintEnd_toEndOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

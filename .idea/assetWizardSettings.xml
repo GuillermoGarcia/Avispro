@@ -18,12 +18,44 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="clipartAsset">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
                                                 <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_power_settings_new_black_24dp.xml" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,8 +76,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="ffffff" />
-                                                <entry key="paddingPercent" value="-10" />
+                                                <entry key="color" value="447ab9" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,7 +87,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_settings_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_exposure_plus_1_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -67,6 +98,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+                                                <entry key="color" value="447ab9" />
+                                                <entry key="paddingPercent" value="-10" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -77,9 +110,32 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="cropped" value="true" />
-                                      <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="ic_settings" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="backgroundColor" value="447ab9" />
+                                      <entry key="iconShape" value="HRECT" />
+                                      <entry key="imageAsset" value="C:\Users\Ulric\Downloads\minions.png" />
+                                      <entry key="outputName" value="ic_plus_pnj" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="notification">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -125,10 +181,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="fef265" />
-                            <entry key="opacityPercent" value="60" />
-                            <entry key="outputName" value="ic_plus" />
-                            <entry key="sourceFile" value="C:\Users\Ulric" />
+                            <entry key="height" value="64" />
+                            <entry key="outputName" value="ic_minions" />
+                            <entry key="overrideSize" value="true" />
+                            <entry key="sourceFile" value="C:\Users\Ulric\Downloads\minions.svg" />
+                            <entry key="width" value="64" />
                           </map>
                         </option>
                       </PersistentState>

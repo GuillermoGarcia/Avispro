@@ -198,12 +198,12 @@ public class SettingActivity extends AppCompatActivity {
       // ...
       @Override
       public void onTextChanged(CharSequence text, int start, int count, int after) {
-
+        // nothing to do
       }
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count,
                                     int after) {
-        // TODO Auto-generated method stub
+        // nothing to do
       }
 
       @Override
@@ -221,12 +221,12 @@ public class SettingActivity extends AppCompatActivity {
       // ...
       @Override
       public void onTextChanged(CharSequence text, int start, int count, int after) {
-
+        // nothing to do
       }
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count,
                                     int after) {
-        // TODO Auto-generated method stub
+        // nothing to do
       }
 
       @Override
@@ -244,12 +244,12 @@ public class SettingActivity extends AppCompatActivity {
       // ...
       @Override
       public void onTextChanged(CharSequence text, int start, int count, int after) {
-
+        // nothing to do
       }
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count,
                                     int after) {
-        // TODO Auto-generated method stub
+        // nothing to do
       }
 
       @Override

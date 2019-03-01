@@ -23,6 +23,15 @@
     <activity android:name=".actividades.ListSheetActivity" />
     <activity android:name=".actividades.SheetActivity" />
     <activity android:name=".actividades.SettingActivity" />
+    <activity android:name=".actividades.TraitsActivity" />
+    <activity android:name=".actividades.SkillsActivity" />
+    <activity android:name=".actividades.ListSkillActivity" />
+    <activity android:name=".actividades.SkillActivity" />
+    <activity android:name=".actividades.EquipActivity" />
+    <activity android:name=".actividades.CombatActivity" />
+    <activity android:name=".actividades.ListCombatActivity" />
+    <activity android:name=".actividades.NewCombatActivity" />
+    <activity android:name=".actividades.LeadActivity"></activity>
   </application>
 
 </manifest>

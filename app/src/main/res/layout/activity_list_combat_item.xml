@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:card_view="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:clickable="true"
+  android:focusable="true"
+  card_view:cardElevation="8dp"
+  card_view:cardCornerRadius="2dp"
+  card_view:cardUseCompatPadding="true"
+  android:id="@+id/combatCard">
+
+  <android.support.constraint.ConstraintLayout
+    android:id="@+id/combatData"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp">
+
+    <TextView
+      android:id="@+id/combatName"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="0dp"
+      android:textSize="28sp"
+      card_view:layout_constraintStart_toStartOf="parent"
+      card_view:layout_constraintTop_toBottomOf="@id/joined" />
+
+    <TextView
+      android:id="@+id/masterNameTitle"
+      android:gravity="bottom"
+      android:labelFor="@id/masterName"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/combat_master"
+      android:textSize="16sp"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+      android:id="@+id/masterName"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginStart="4dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="20sp"
+      card_view:layout_constraintBaseline_toBaselineOf="@id/masterNameTitle"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintStart_toEndOf="@id/masterNameTitle" />
+
+    <TextView
+      android:id="@+id/combatPjCount"
+      android:gravity="bottom"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginBottom="30dp"
+      android:layout_marginEnd="10dp"
+      android:layout_marginStart="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/combat_pj_count"
+      android:textSize="16sp"
+      card_view:layout_constraintBaseline_toBaselineOf="@id/masterNameTitle"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintEnd_toStartOf="@id/countPJ" />
+
+    <TextView
+      android:id="@+id/countPJ"
+      android:layout_width="0dp"
+      android:layout_height="28dp"
+      android:layout_marginEnd="20dp"
+      android:layout_marginBottom="30dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="20sp"
+      card_view:layout_constraintBaseline_toBaselineOf="@id/masterNameTitle"
+      card_view:layout_constraintBottom_toBottomOf="parent"
+      card_view:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+      android:id="@+id/joined"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="bottom|end"
+      android:text="@string/joined"
+      android:textSize="22sp"
+      android:textColor="@color/colorMetallicBlue"
+      card_view:layout_constraintEnd_toEndOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent"
+      android:visibility="invisible" />
+
+    <TextView
+      android:id="@+id/master"
+      android:layout_width="wrap_content"
+      android:layout_height="36dp"
+      android:layout_marginTop="10dp"
+      android:layout_marginEnd="16dp"
+      android:gravity="bottom|end"
+      android:text="@string/master"
+      android:textSize="22sp"
+      android:textColor="@color/colorMetallicBlue"
+      card_view:layout_constraintEnd_toEndOf="parent"
+      card_view:layout_constraintTop_toTopOf="parent"
+      android:visibility="invisible" />
+
+  </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

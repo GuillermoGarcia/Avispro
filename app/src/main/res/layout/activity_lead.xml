@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_height="match_parent"
+  android:layout_marginStart="8dp"
+  android:layout_marginEnd="8dp"
+  android:layout_width="match_parent"
+  tools:context=".actividades.LeadActivity">
+
+  <TextView
+    android:ellipsize="end"
+    android:gravity="center"
+    android:id="@+id/leadTitle"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:textSize="24sp" />
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/characterList"
+    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/characterActions"
+    app:layout_constraintTop_toBottomOf="@+id/leadTitle">
+  </android.support.v7.widget.RecyclerView>
+
+  <ProgressBar
+    android:id="@+id/progressBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_height="128dp"
+    android:layout_width="128dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/characterList"
+    app:layout_constraintTop_toBottomOf="@id/leadTitle"
+    android:indeterminateDrawable="@drawable/circular_avatar" />
+
+  <LinearLayout
+    android:id="@+id/characterActions"
+    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/characterList"
+    app:layout_constraintTop_toBottomOf="@id/leadTitle"
+    android:orientation="vertical">
+
+    <ImageView
+      android:contentDescription="@string/descp_avatar"
+      android:id="@+id/characterAvatar"
+      android:layout_gravity="center"
+      android:layout_height="wrap_content"
+      android:layout_width="wrap_content" />
+
+    <TextView
+      android:gravity="center"
+      android:id="@+id/characterName"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:textSize="20sp" />
+
+    <TextView
+      android:gravity="center"
+      android:id="@+id/characterAction"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:text="@string/name_action"
+      android:textSize="18sp" />
+
+    <RadioGroup
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:orientation="vertical">
+
+      <RadioButton
+        android:id="@+id/attackAction"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/attack_action" />
+
+      <RadioButton
+        android:id="@+id/moveAction"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/move_action" />
+
+      <RadioButton
+        android:id="@+id/delayAction"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/delay_action" />
+
+      <RadioButton
+        android:id="@+id/aimAction"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:onClick="onRadioButtonClicked"
+        android:text="@string/aim_action" />
+
+    </RadioGroup>
+
+    <TextView
+      android:labelFor="@id/charactersList"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="10dp"
+      android:layout_width="wrap_content"
+      android:text="@string/target_action"
+      android:textSize="18sp" />
+
+    <Spinner
+      android:id="@+id/charactersList"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent">
+    </Spinner>
+
+  </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -7,7 +7,7 @@
   android:layout_height="match_parent">
 
   <TextView
-    android:id="@+id/dialog_save_user"
+    android:id="@+id/dialog_generic_save"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/dialog_save_user"/>

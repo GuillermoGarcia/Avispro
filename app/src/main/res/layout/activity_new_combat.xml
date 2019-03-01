@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_height="match_parent"
+  android:layout_marginEnd="8dp"
+  android:layout_marginStart="8dp"
+  android:layout_width="match_parent"
+  tools:context=".actividades.NewCombatActivity">
+
+  <TextView
+    android:gravity="center_vertical"
+    android:id="@+id/combatTitle"
+    android:labelFor="@id/combatTitle"
+    app:layout_constraintEnd_toStartOf="@id/combatTitleValue"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintHorizontal_weight="3"
+    android:layout_height="40dp"
+    android:layout_marginEnd="10dp"
+    android:layout_width="0dp"
+    android:text="@string/combat_title"
+    android:textSize="18sp" />
+
+  <EditText
+    android:hint="@string/combat_title_hint"
+    android:id="@+id/combatTitleValue"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/combatTitle"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintHorizontal_weight="7"
+    android:layout_height="40dp"
+    android:layout_width="0dp" />
+
+  <TextView
+    android:gravity="center_vertical"
+    android:id="@+id/descriptionText"
+    android:labelFor="@id/descriptionEditText"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="@id/combatTitle"
+    app:layout_constraintTop_toBottomOf="@id/combatTitle"
+    app:layout_constraintHorizontal_weight="3"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    android:layout_width="0dp"
+    android:text="@string/combat_description"
+    android:textSize="18sp" />
+
+  <EditText
+    android:gravity="top"
+    android:hint="@string/combat_description_hint"
+    android:id="@+id/descriptionEditText"
+    android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/descriptionText"
+    app:layout_constraintStart_toStartOf="@id/combatTitleValue"
+    app:layout_constraintTop_toBottomOf="@id/combatTitleValue"
+    app:layout_constraintHorizontal_weight="7"
+    android:layout_height="wrap_content"
+    android:layout_width="0dp"
+    android:maxLines="6"
+    android:minLines="3" />
+
+  <ImageButton
+    android:id="@+id/addPnjImage"
+    android:layout_height="64dp"
+    android:layout_marginTop="20dp"
+    android:layout_width="64dp"
+    android:src="@drawable/ic_minions"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />
+
+  <TextView
+    android:id="@+id/addPnjText"
+    app:layout_constraintBottom_toBottomOf="@id/addPnjImage"
+    app:layout_constraintStart_toEndOf="@id/addPnjImage"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_width="wrap_content"
+    android:text="@string/combat_add_pnj"
+    android:textSize="22sp" />
+
+  <View
+    android:id="@+id/separator"
+    android:background="@color/colorSteelBlue"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/addPnjImage"
+    android:layout_height="2dp"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent" />
+
+  <GridLayout
+    android:columnCount="1"
+    android:id="@+id/pnjsList"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/separator"
+    android:orientation="vertical"
+    android:verticalScrollbarPosition="defaultPosition">
+
+  </GridLayout>
+
+</android.support.constraint.ConstraintLayout>

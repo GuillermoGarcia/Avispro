@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:id="@+id/skillEdit"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="30dp" >
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:gravity="bottom"
+      android:text="@string/skill_name"
+      android:textSize="22sp"/>
+
+    <AutoCompleteTextView
+      android:id="@+id/skillName"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_marginStart="20dp"
+      android:textSize="24sp" />
+
+  </LinearLayout>
+
+  <android.support.constraint.ConstraintLayout
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:layout_width="match_parent">
+
+    <TextView
+      android:id="@+id/skillBase"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="20dp"
+      android:text="@string/skill_base_large"
+      android:textSize="22sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+      android:id="@+id/skillBaseValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:textSize="22sp"
+      app:layout_constraintStart_toEndOf="@id/skillBase"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+      android:id="@+id/skillBasePlusValue"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:adjustViewBounds="true"
+      android:backgroundTint="@color/colorBlack"
+      android:clickable="true"
+      android:focusable="true"
+      android:src="@mipmap/ic_plus_one_button"
+      app:layout_constraintEnd_toStartOf="@id/skillBaseMinusValue"
+      app:layout_constraintHorizontal_bias="0.7"
+      app:layout_constraintStart_toEndOf="@id/skillBaseValue"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:backgroundTint="@color/colorBlack"
+      android:clickable="true"
+      android:focusable="true"
+      android:id="@+id/skillBaseMinusValue"
+      android:layout_height="24dp"
+      android:layout_marginEnd="30dp"
+      android:layout_width="24dp"
+      android:src="@mipmap/ic_minus_one_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/skillPrimaryBonus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_primary_bonus_large"
+      android:textSize="22sp" />
+
+    <TextView
+      android:id="@+id/skillPrimaryBonusValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginBottom="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="22sp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/skillSecundaryBonus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_secundary_bonus_large"
+      android:textSize="22sp" />
+
+    <TextView
+      android:id="@+id/skillSecundaryBonusValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginBottom="20dp"
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="22sp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/skillExtra"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_extra"
+      android:textSize="22sp" />
+
+    <TextView
+      android:id="@+id/skillExtraValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginBottom="20dp"
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="22sp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/skillPap"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginBottom="20dp"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:text="@string/skill_pap"
+      android:textSize="22sp" />
+
+    <TextView
+      android:id="@+id/skillPapValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      android:layout_marginBottom="20dp"
+      android:gravity="end"
+      android:scrollHorizontally="true"
+      android:ellipsize="end"
+      android:maxLines="1"
+      android:textSize="22sp" />
+
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="28dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="30dp"
+      android:layout_marginEnd="8dp"
+      android:gravity="top|end"
+      android:text="@string/skill_total_large"
+      android:textSize="22sp" />
+
+    <TextView
+      android:id="@+id/skillTotalValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dp"
+      android:gravity="end"
+      android:textSize="22sp" />
+
+  </LinearLayout>
+
+</LinearLayout>

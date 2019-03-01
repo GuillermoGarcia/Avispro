@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <item
     android:id="@+id/userEdit"
     android:icon="@mipmap/ic_settings"
-    android:title=""
-    app:showAsAction="always" />
+    android:title="@string/edit_user"
+    app:showAsAction="collapseActionView" />
+
+  <item
+    android:id="@+id/combatTurns"
+    android:icon="@mipmap/ic_combat"
+    android:title="@string/combat_turns"
+    app:showAsAction="collapseActionView" />
 
   <item
     android:id="@+id/appExit"
     android:icon="@mipmap/ic_logout"
-    android:title=""
-    app:showAsAction="always" />
+    android:title="@string/logout"
+    app:showAsAction="collapseActionView" />
 
 </menu>

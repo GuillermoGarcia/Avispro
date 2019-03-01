@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-
     btnLogin = findViewById(R.id.boton_login);
     btnRegister = findViewById(R.id.boton_register);
 
@@ -153,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void beforeTextChanged(CharSequence s, int start, int count,
                                     int after) {
-        // TODO Auto-generated method stub
+        // nothing to do
       }
 
       @Override

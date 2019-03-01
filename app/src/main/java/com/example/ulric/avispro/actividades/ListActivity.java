@@ -3,12 +3,11 @@ package com.example.ulric.avispro.actividades;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,18 +16,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ulric.avispro.R;
 import com.example.ulric.avispro.adaptadores.sheetsListAdapter;
 import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.example.ulric.avispro.modelos.Personaje;
 import com.example.ulric.avispro.modelos.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,13 +36,17 @@ public class ListActivity extends AppCompatActivity {
 
   private final List<Personaje> personajes = Collections.synchronizedList(new ArrayList<Personaje>());
   private Usuario usuario;
-  private FloatingActionButton fab;
   private sheetsListAdapter adapter = null;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_list);
+
+    // Creamos, si no existe, el directorio para guardar los avatars
+
+    File file = new File(getApplicationContext().getFilesDir() + "/avatars/");
+    if (!file.exists()) { file.mkdir(); }
 
     // Recogemos los datos de usuario pasados de una actividad anterior
     Bundle bundle = getIntent().getExtras();
@@ -79,18 +83,10 @@ public class ListActivity extends AppCompatActivity {
     registerForContextMenu(recycler);
 
     // Cargamos los personajes del usuario
-    usuario.cargarPersonajes(new MyCallbackData() {
-      @Override
-      public void onCallbackData(Personaje personaje) {
-        personajes.add(personaje);
-        Collections.sort(personajes);
-        Log.d("Callback: ", "Personaje cargado: " + personaje.getIdPersonaje());
-        adapter.notifyItemInserted(personajes.size() - 1);
-      }
-    });
+    cargarPersonajes(usuario.getPersonajes());
 
     // Referenciamos el botón flotante y le asignamos un listener
-    fab = findViewById(R.id.fab);
+    FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -121,7 +117,7 @@ public class ListActivity extends AppCompatActivity {
   /**
    * Nos permite realizar las acciones correspondientes a cada opción del menú contextual.
    * @param item, opción del menú pulsada
-   * @return
+   * @return true
    */
   @Override
   public boolean onContextItemSelected(final MenuItem item) {
@@ -142,7 +138,8 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
               adapter.borrarPersonaje(adapter.getPosition(), usuario);
-              //Toast.makeText(ListActivity.this, getText(R.string.character_delete) + " " + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
+              //Toast.makeText(ListActivity.this, getText(R.string.character_delete) + " "
+              // + personajes.get(adapter.getPosition()).getNombre(), Toast.LENGTH_SHORT).show();
             }
           }).show();
         break ;
@@ -169,11 +166,12 @@ public class ListActivity extends AppCompatActivity {
 
   /**
    * @param item, opción del menú seleccionada
-   * @return
+   * @return true
    */
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
 
+    Bundle bundle = new Bundle();
     // Comprobar qué opción ha elegido el usuario
     switch(item.getItemId()) {
 
@@ -183,11 +181,16 @@ public class ListActivity extends AppCompatActivity {
         startActivity(salir);
         break ;
       case R.id.userEdit:
-        Bundle bundle = new Bundle();
         bundle.putSerializable("usuario", usuario);
         Intent settings = new Intent(ListActivity.this, SettingActivity.class);
         settings.putExtras(bundle);
         startActivity(settings);
+        break ;
+      case R.id.combatTurns:
+        bundle.putSerializable("usuario", usuario);
+        Intent combat = new Intent(ListActivity.this, ListCombatActivity.class);
+        combat.putExtras(bundle);
+        startActivity(combat);
         break ;
 
       default :
@@ -202,4 +205,31 @@ public class ListActivity extends AppCompatActivity {
   **/
   @Override
   public void onBackPressed(){ }
+
+  private void cargarPersonajes(List<String> idPersonajes) {
+    for (final String id : idPersonajes) {
+      FirebaseFirestore.getInstance().collection("personajes").document(id).get()
+        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+          @Override
+          public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            if (task.isSuccessful()) {
+              DocumentSnapshot document = task.getResult();
+              if (document.exists()) {
+                Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
+                Personaje p = document.toObject(Personaje.class);
+                p.cargarAvatar(getApplicationContext(), false);
+                personajes.add(p);
+                Collections.sort(personajes);
+                adapter.notifyItemInserted(personajes.size() - 1);
+              } else {
+                Log.d("Usuario", "No such document");
+              }
+            } else {
+              Log.d("Usuario", "get failed with ", task.getException());
+            }
+          }
+        });
+    }
+
+  }
 }

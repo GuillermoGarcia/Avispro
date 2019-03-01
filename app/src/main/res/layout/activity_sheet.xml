@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:layout_editor_absoluteX="8dp"
-  tools:layout_editor_absoluteY="8dp"
   android:paddingStart="20dp"
   android:paddingEnd="20dp"
-  tools:context=".actividades.SheetActivity">
+  tools:context=".actividades.SheetActivity"
+  tools:layout_editor_absoluteX="8dp"
+  tools:layout_editor_absoluteY="8dp">
 
   <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:textSize="30sp"
-    android:text="@string/new_sheet"/>
+    android:text="@string/new_sheet"
+    android:textSize="30sp" />
+
+  <LinearLayout
+    android:id="@+id/editAvatar"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:clickable="true">
+
+    <ImageView
+      android:id="@+id/iavatar"
+      android:layout_height="32dp"
+      android:layout_width="32dp"
+      android:layout_marginEnd="16dp"
+      android:src="@drawable/avatar_default"/>
+
+    <TextView
+      android:gravity="bottom"
+      android:layout_height="match_parent"
+      android:layout_width="wrap_content"
+      android:text="@string/edit_avatar" />
+
+  </LinearLayout>
+
 
   <android.support.design.widget.TextInputLayout
     android:id="@+id/til_character_name"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etNameCharacter"
@@ -43,8 +65,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etLevelCharacter"
@@ -53,7 +75,7 @@
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
       android:hint="@string/hint_level_sheet"
-      android:inputType="numberDecimal"/>
+      android:inputType="numberDecimal" />
 
   </android.support.design.widget.TextInputLayout>
 
@@ -62,8 +84,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etRaceCharacter"
@@ -72,7 +94,7 @@
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
       android:hint="@string/hint_race_sheet"
-      android:inputType="textPersonName"/>
+      android:inputType="textPersonName" />
 
   </android.support.design.widget.TextInputLayout>
 
@@ -81,8 +103,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etCultureCharacter"
@@ -91,7 +113,7 @@
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
       android:hint="@string/hint_culture_sheet"
-      android:inputType="textPersonName"/>
+      android:inputType="textPersonName" />
 
   </android.support.design.widget.TextInputLayout>
 
@@ -100,8 +122,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etOriginCharacter"
@@ -110,7 +132,7 @@
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
       android:hint="@string/hint_origin_sheet"
-      android:inputType="textPersonName"/>
+      android:inputType="textPersonName" />
 
   </android.support.design.widget.TextInputLayout>
 
@@ -119,8 +141,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    app:counterTextAppearance="@style/counterText"
-    app:counterOverflowTextAppearance="@style/counterOverride">
+    app:counterOverflowTextAppearance="@style/counterOverride"
+    app:counterTextAppearance="@style/counterText">
 
     <EditText
       android:id="@+id/etAgeCharacter"
@@ -129,20 +151,74 @@
       android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
       android:hint="@string/hint_age_sheet"
-      android:inputType="numberDecimal"/>
+      android:inputType="numberDecimal" />
 
   </android.support.design.widget.TextInputLayout>
 
-  <Button
-    android:id="@+id/save_button"
+  <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/save_button"/>
+    android:paddingStart="30dp"
+    android:paddingEnd="30dp">
 
-  <Button
-    android:id="@+id/cancel_button"
+    <ImageButton
+      android:id="@+id/traitsCharacter"
+      android:layout_width="65dp"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorSteelBlue"
+      android:src="@mipmap/ic_traits"
+      android:tooltipText="@string/seeTraits"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:id="@+id/skillsCharacter"
+      android:layout_width="65dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:backgroundTint="@color/colorSteelBlue"
+      android:src="@mipmap/ic_skills"
+      android:tooltipText="@string/seeSkills"
+      app:layout_constraintEnd_toStartOf="@id/equipCharacter"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintStart_toEndOf="@+id/traitsCharacter"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+      android:id="@+id/equipCharacter"
+      android:layout_width="65dp"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/colorSteelBlue"
+      android:src="@mipmap/ic_equip"
+      android:tooltipText="@string/seeEquip"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_weight="1"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </android.support.constraint.ConstraintLayout>
+
+  <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/boton_cancel" />
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp">
+    <Button
+      android:id="@+id/save_button"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:text="@string/save_button" />
+
+    <Button
+      android:id="@+id/cancel_button"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:text="@string/boton_cancel" />
+  </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>

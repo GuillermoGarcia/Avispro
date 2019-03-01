@@ -1,12 +1,16 @@
 <resources>
   <string name="app_name">AVISPRO</string>
 
+  <!-- App Menu -->
+  <string name="edit_user">Editar Usuario</string>
+  <string name="combat_turns">Turnos de Combate</string>
+  <string name="logout">Salir</string>
+
   <!-- Login Activity -->
   <string name="label_usuario">Nombre de Usuario</string>
   <string name="label_contrasena">Contraseña</string>
   <string name="boton_login">ENTRAR</string>
   <string name="boton_register">REGISTRARSE</string>
-
   <string name="empty_login"> Usuario o Contraseña vacios.</string>
   <string name="wrong_login">Usuario o Contraseña no válidos.</string>
 
@@ -26,6 +30,7 @@
 
   <!-- Sheet Activity -->
   <string name="new_sheet">Ficha de Personaje</string>
+  <string name="edit_avatar">Cambiar Avatar</string>
   <string name="hint_name_sheet">Nombre del Personaje</string>
   <string name="hint_race_sheet">Raza del Personaje</string>
   <string name="hint_age_sheet">Edad del Personaje</string>
@@ -33,6 +38,9 @@
   <string name="hint_origin_sheet">Procedencia del Personaje</string>
   <string name="hint_level_sheet">Nivel del Personaje</string>
   <string name="character_delete">Borrar Personaje</string>
+  <string name="seeTraits">Ver Características</string>
+  <string name="seeSkills">Ver Habilidades</string>
+  <string name="seeEquip">Ver Equipo</string>
 
   <!-- Setting Activity -->
   <string name="setting_title">DATOS DEL USUARIO</string>
@@ -44,16 +52,97 @@
   <string name="save_button">GUARDAR</string>
 
 
-  <!-- Dialog -->
+  <!-- Dialogs -->
   <string name="dialog_accept">Aceptar</string>
   <string name="dialog_ok">Entendido</string>
   <string name="dialog_cancel">Cancelar</string>
   <string name="dialog_confirm">Confirmar</string>
-
-  <!-- Dialog Delete Character -->
   <string name="dialog_delete_text">¿Realmente desea borrar este personaje?</string>
-
-  <!-- Dialog Save User -->
   <string name="dialog_save_user">Datos de Usuario Guardados Correctamente</string>
+  <string name="dialog_trait_text">Nuevo valor de la Característica</string>
+  <string name="dialog_trait_title">Editar Característica</string>
+  <string name="dialog_save_trait">¿Realmente desea guardar estas características?</string>
+  <string name="dialog_save_trait_title">Guardar Características</string>
+
+  <!-- Traits Activity -->
+  <string name="traitsName">Características</string>
+  <string name="traitsNameOf">Características de </string>
+  <string name="forTrait">Fortaleza</string>
+  <string name="conTrait">Constitución</string>
+  <string name="agiTrait">Agilidad</string>
+  <string name="desTrait">Destreza</string>
+  <string name="refTrait">Reflejos</string>
+  <string name="intTrait">Inteligencia</string>
+  <string name="memTrait">Memoria</string>
+  <string name="perTrait">Percepcion</string>
+  <string name="podTrait">Poder</string>
+  <string name="volTrait">Voluntad</string>
+  <string name="empTrait">Empatia</string>
+  <string name="apaTrait">Apariencia</string>
+  <string name="baseTrait">INI</string>
+  <string name="modTrait">MOD</string>
+
+  <!-- Skill Activity -->
+  <string name="skill_total">Total:</string>
+  <string name="skill_total_large">Habilidad Total:</string>
+  <string name="skill_base">Base:</string>
+  <string name="skill_base_large">Habilidad Base:</string>
+  <string name="skill_primary_bonus">B.P:</string>
+  <string name="skill_primary_bonus_large">Bonus Principal:</string>
+  <string name="skill_secundary_bonus">B.S:</string>
+  <string name="skill_secundary_bonus_large">Bonus Secundario:</string>
+  <string name="skill_extra">Extra:</string>
+  <string name="skill_pap">PAP\'s:</string>
+  <string name="skill_cero">0</string>
+  <string name="skill_name">Habilidad:</string>
+  <string name="skill_item_delete">Borrar Habilidad</string>
+  <string name="dialog_delete_skill_text">Confirme el borrado esta habilidad</string>
+  <string name="skill_delete">Borrar Habilidad</string>
+
+  <!-- Combat Activity -->
+  <string name="combat_master">Master:</string>
+  <string name="combat_pj_count">Jugadores:</string>
+  <string name="joined">Participando</string>
+  <string name="master">Master</string>
+  <string name="combat_title">Título:</string>
+  <string name="combat_title_hint">Título del combate&#8230;</string>
+  <string name="combat_description">Descripción:</string>
+  <string name="combat_description_hint">Escriba una descripción del combate&#8230;</string>
+  <string name="combat_add_pnj">Añadir PNJ</string>
+  <string name="in_combat">Combatiendo</string>
+  <string name="no_combat">Preparandose</string>
+  <string name="combat_turn">Turno:</string>
+  <string name="combat_pj">Personajes Jugadores</string>
+  <string name="combat_pnj">Personajes No Jugadores</string>
+  <string name="combat_join">Unirse al Combate</string>
+  <string name="combat_left">Dejar el Combate</string>
+  <string name="combat_fight">Combatir</string>
+  <string name="combat_init">Iniciar Combate</string>
+  <string name="combat_cancel">Volver</string>
+  <string name="combat_wait_start">Te has unido al combate, podrás entrar una vez el master lo inicie.</string>
+  <string name="dialog_combat_join_title">Unirse al combate</string>
+  <string name="dialog_combat_join_text">Para unirte al combate debes proporcionar la velocidad de tu arma.</string>
+  <string name="dialog_combat_join_speed">Velocidad del Arma:</string>
+  <string name="dialog_combat_join_pj">Personaje:</string>
+  <string name="dialog_combat_join_ok">Unirse</string>
+  <string name="dialog_combat_join_cancel">No Unirse</string>
+  <string name="dialog_combat_left_title">Dejar el combate</string>
+  <string name="dialog_combat_left_text">¿Realmente desea abandonar el combate?</string>
+  <string name="dialog_combat_left_ok">Salir</string>
+  <string name="dialog_combat_left_cancel">Quedarse</string>
+  <string name="dialog_new_pnj_title">Nuevo Pnj</string>
+  <string name="dialog_new_pnj_name">Nombre</string>
+  <string name="dialog_new_pnj_lead">Iniciativa</string>
+  <string name="dialog_new_pnj_speed">Velocidad del Arma</string>
+  <string name="dialog_save_combat">Confirme que desea guardar la información del combate</string>
+  <string name="dialog_save_combat_title">Guardar Combate</string>
+
+  <!--   Lead Activity  -->
+  <string name="name_action">Acción</string>
+  <string name="attack_action">Atacar</string>
+  <string name="move_action">Movimiento</string>
+  <string name="delay_action">Retrasar</string>
+  <string name="aim_action">Apuntar</string>
+  <string name="target_action">Objetivo:</string>
 
 </resources>

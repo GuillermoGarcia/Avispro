@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.ulric.avispro.interfaces.MyCallbackData;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -136,37 +138,43 @@ public class Personaje implements Serializable, Comparable<Personaje> {
   /**
    * Descargar desde Firebase Storage a un archivo local el avatar del personaje
    * @param contexto, contexto de la aplicación
-   * @param recarga, true si hay que prevenir ejecutarse varias veces
    */
-  public void cargarAvatar(final Context contexto, Boolean recarga) {
+  public void cargarAvatar(final Context contexto) {
     if (!avatar.equals("")) {
       final String name = avatar.substring(0, (avatar.lastIndexOf(".")));
       final String ext = avatar.substring((avatar.lastIndexOf(".") + 1));
-      if (recarga) { avatar = ""; }
       File dir = new File(contexto.getFilesDir() + "/avatars/");
       try {
         final File oldfile = new File(dir, avatar);
+        if (oldfile.exists()) {
+          oldfile.delete();
+        }
         final File localFile = File.createTempFile(name, ".temp", dir);
         String av = String.format("%s/%s.%s", "avatars", name, ext);
-        FirebaseStorage.getInstance().getReference().child(av).getFile(localFile)
+        StorageReference avatarRef = FirebaseStorage.getInstance().getReference().child(av);
+        Log.d("AvatarRef: ", "Path: " + avatarRef.getPath());
+        Log.d("AvatarRef: ", "Name: " + avatarRef.getName());
+        Log.d("AvatarRef: ", "Bucket: " + avatarRef.getBucket());
+        avatarRef.getFile(localFile)
             .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
               @Override
               public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                avatar = String.format("%s.%s", name, ext);
-                if (oldfile.delete()) {
-                  Boolean success = localFile.renameTo(new File(contexto.getFilesDir() + "/avatars/", avatar));
-                  Log.d("Personaje: ", "Creación del archivo: " + success);
-                } else {
-                  Log.d("Personaje: ", "Borrado del archivo antiguo: Fallado.");
-                }
               }
             }).addOnFailureListener(new OnFailureListener() {
-          @Override
-          public void onFailure(@NonNull Exception e) {
-            e.printStackTrace();
-            Log.e("Personaje: ", "Load file from Firebase error.");
-          }
-        });
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                  e.printStackTrace();
+                  Log.e("Personaje: ", "Load file from Firebase error.");
+                }
+            }).addOnCanceledListener(new OnCanceledListener() {
+              @Override
+              public void onCanceled() {
+                Log.e("Personaje: ", "Canceled.");
+              }
+            });
+        avatar = String.format("%s.%s", name, ext);
+        Boolean success = localFile.renameTo(new File(contexto.getFilesDir() + "/avatars/", avatar));
+        Log.d("Personaje: ", "Creación del archivo: " + success);
       } catch (java.io.IOException e) {
         e.printStackTrace();
         Log.e("Personaje: ", "IOException");
@@ -181,15 +189,19 @@ public class Personaje implements Serializable, Comparable<Personaje> {
    */
   public Uri conseguirAvatarUri(final Context contexto) {
     File file = new File(contexto.getFilesDir()+ "/avatars/", avatar);
+    Boolean recarga = false;
     while (!file.exists()) {
-      cargarAvatar(contexto, true);
-      Handler handler = new Handler();
-      handler.postDelayed(new Runnable() {
-        @Override
-        public void run() {
-          File file = new File(contexto.getFilesDir()+ "/avatars/", avatar);
-        }
-      }, 5000);
+      if (!recarga) {
+        cargarAvatar(contexto);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            File file = new File(contexto.getFilesDir() + "/avatars/", avatar);
+          }
+        }, 5000);
+        recarga = true;
+      }
     }
     return Uri.fromFile(file);
   }

@@ -14,7 +14,6 @@
       android:launchMode="singleTask">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
@@ -31,7 +30,7 @@
     <activity android:name=".actividades.CombatActivity" />
     <activity android:name=".actividades.ListCombatActivity" />
     <activity android:name=".actividades.NewCombatActivity" />
-    <activity android:name=".actividades.LeadActivity"></activity>
+    <activity android:name=".actividades.LeadActivity" />
   </application>
 
 </manifest>

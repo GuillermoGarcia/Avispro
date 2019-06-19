@@ -41,7 +41,7 @@ public class CombatActivity extends AppCompatActivity {
   private Combatiente       pj;
   private List<Combatiente> pjs;
   private TextView          numPjs;
-  private Button            unirse, quitarse, combatir;
+  private Button            unirse, quitarse, combatir, gestion, volver;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,8 @@ public class CombatActivity extends AppCompatActivity {
     quitarse =               findViewById(R.id.combatLeft);
     combatir =               findViewById(R.id.combatFight);
     Button iniciar =         findViewById(R.id.combatInit);
-    Button volver =          findViewById(R.id.combatCancel);
+    gestion =                findViewById(R.id.combatPnj);
+    volver =                 findViewById(R.id.combatCancel);
     if (personaje != null) {
       pj = new Combatiente(personaje.getIdPersonaje(), personaje.getNombre(),
           personaje.conseguirIniciativa());
@@ -87,6 +88,7 @@ public class CombatActivity extends AppCompatActivity {
     unirse.setVisibility(View.INVISIBLE);
     quitarse.setVisibility(View.INVISIBLE);
     iniciar.setVisibility(View.INVISIBLE);
+    gestion.setVisibility(View.INVISIBLE);
 
     View sep = findViewById(R.id.separadorPnj);
     TextView pnjTitle = findViewById(R.id.pnjListTitle);
@@ -100,6 +102,9 @@ public class CombatActivity extends AppCompatActivity {
 
     if (combate.esMaster(usuario.getIdUsuario())) {
       iniciar.setVisibility(View.VISIBLE);
+      gestion.setVisibility(View.VISIBLE);
+      enPreparacion.setHeight(0);
+      enCombate.setHeight(0);
       final GridLayout gridLayoutPnj = findViewById(R.id.pnjList);
       sep.setVisibility(View.VISIBLE);
       pnjTitle.setVisibility(View.VISIBLE);
@@ -116,7 +121,8 @@ public class CombatActivity extends AppCompatActivity {
                     int childCount = gridLayoutPnj.getChildCount();
                     TextView pnjText = new TextView(contexto);
                     pnjText.setText(String.format("%s", pnj.getNombre()));
-                    pnjText.setWidth(0);
+                    pnjText.setWidth((gridLayoutPnj.getWidth() / 2));
+                    pnjText.setTextSize(22);
                     gridLayoutPnj.addView(pnjText, childCount);
                   }
                 }
@@ -266,6 +272,19 @@ public class CombatActivity extends AppCompatActivity {
       }
     });
 
+    gestion.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuario", usuario);
+        bundle.putSerializable("combate", combate);
+        Intent combat = new Intent(CombatActivity.this, NewCombatActivity.class);
+        combat.putExtras(bundle);
+        startActivity(combat);
+        finish();
+      }
+    });
+
     volver.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -274,6 +293,16 @@ public class CombatActivity extends AppCompatActivity {
       }
     });
 
+  }
+
+
+  /**
+   * Llamada cuando la actual ventana de la actividad gana o pierde el foco.
+   * @param hasFocus, boolean
+   */
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    volver.setHeight(gestion.getHeight());
   }
 
   /**

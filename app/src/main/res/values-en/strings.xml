@@ -122,4 +122,7 @@
   <string name="dialog_combat_left_text">Do you really want to leave combat?</string>
   <string name="edit_avatar">Change Avatar</string>
   <string name="dialog_combat_join_pj">Character:</string>
+  <string name="combat_manage">Combat Manage</string>
+  <string name="dialog_delete_npc_title">Delete npc</string>
+  <string name="dialog_delete_npc_text">Do you really want delete npc</string>
 </resources>

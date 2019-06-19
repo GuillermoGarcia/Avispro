@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
@@ -9,202 +9,229 @@
   android:layout_width="match_parent"
   tools:context=".actividades.CombatActivity">
 
-  <TextView
-    android:id="@+id/combatTitle"
+  <android.support.constraint.ConstraintLayout
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:textSize="24sp"
-    android:textStyle="bold"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:layout_width="match_parent">
 
-  <TextView
-    android:id="@+id/combatMaster"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:textSize="20sp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/combatTitle" />
+    <TextView
+      android:id="@+id/combatTitle"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      android:gravity="center"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-  <TextView
-    android:id="@+id/combatPjCount"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/combatMaster"
-    app:layout_constraintStart_toStartOf="parent"
-    android:text="@string/combat_pj_count"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/combatMaster"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      android:gravity="center"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/combatTitle" />
 
-  <TextView
-    android:id="@+id/combatPjCountValue"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="wrap_content"
-    app:layout_constraintTop_toBottomOf="@+id/combatMaster"
-    app:layout_constraintStart_toEndOf="@id/combatPjCount"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/combatPjCount"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_width="wrap_content"
+      app:layout_constraintTop_toBottomOf="@+id/combatMaster"
+      app:layout_constraintStart_toStartOf="parent"
+      android:text="@string/combat_pj_count"
+      android:textSize="20sp" />
 
-  <TextView
-    android:id="@+id/inCombat"
-    android:layout_width="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/combatMaster"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:text="@string/in_combat"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/combatPjCountValue"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_marginStart="10dp"
+      android:layout_width="wrap_content"
+      app:layout_constraintTop_toBottomOf="@+id/combatMaster"
+      app:layout_constraintStart_toEndOf="@id/combatPjCount"
+      android:textSize="20sp" />
 
-  <TextView
-    android:id="@+id/noCombat"
-    android:layout_width="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toBottomOf="@id/combatMaster"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:text="@string/no_combat"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/inCombat"
+      android:layout_width="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginTop="20dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toBottomOf="@id/combatMaster"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:text="@string/in_combat"
+      android:textSize="20sp" />
 
-  <TextView
-    android:id="@+id/combatTurn"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    app:layout_constraintTop_toBottomOf="@id/inCombat"
-    app:layout_constraintStart_toStartOf="@id/inCombat"
-    android:text="@string/combat_turn"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/noCombat"
+      android:layout_width="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginTop="20dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toBottomOf="@id/combatMaster"
+      app:layout_constraintEnd_toEndOf="parent"
+      android:text="@string/no_combat"
+      android:textSize="20sp" />
 
-  <TextView
-    android:id="@+id/combatTurnValue"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
-    app:layout_constraintTop_toBottomOf="@id/inCombat"
-    app:layout_constraintStart_toEndOf="@id/combatTurn"
-    app:layout_constraintBaseline_toBaselineOf="@id/combatTurn"
-    android:textSize="20sp" />
+    <TextView
+      android:id="@+id/combatTurn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toBottomOf="@id/inCombat"
+      app:layout_constraintStart_toStartOf="@id/inCombat"
+      android:text="@string/combat_turn"
+      android:textSize="20sp" />
 
-  <View
-    android:id="@+id/separador"
-    android:background="@color/colorSteelBlue"
-    android:layout_height="2dp"
-    android:layout_marginTop="30dp"
-    android:layout_width="match_parent"
-    app:layout_constraintTop_toBottomOf="@id/combatTurn"/>
+    <TextView
+      android:id="@+id/combatTurnValue"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="10dp"
+      app:layout_constraintTop_toBottomOf="@id/inCombat"
+      app:layout_constraintStart_toEndOf="@id/combatTurn"
+      app:layout_constraintBaseline_toBaselineOf="@id/combatTurn"
+      android:textSize="20sp" />
 
-  <TextView
-    android:id="@+id/pjListTitle"
-    android:gravity="center"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    app:layout_constraintTop_toBottomOf="@id/separador"
-    android:text="@string/combat_pj"
-    android:textSize="26sp"/>
+    <View
+      android:id="@+id/separador"
+      android:background="@color/colorSteelBlue"
+      android:layout_height="2dp"
+      android:layout_marginTop="30dp"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/combatTurn"/>
 
-  <GridLayout
-    android:alignmentMode="alignBounds"
-    android:id="@+id/pjList"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:columnCount="2"
-    android:columnOrderPreserved="true"
-    android:overScrollMode="always"
-    android:verticalScrollbarPosition="defaultPosition"
-    app:layout_constraintTop_toBottomOf="@id/pjListTitle"
-    android:useDefaultMargins="true">
-  </GridLayout>
+    <TextView
+      android:id="@+id/pjListTitle"
+      android:gravity="center"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/separador"
+      android:text="@string/combat_pj"
+      android:textSize="26sp"/>
 
-  <View
-    android:id="@+id/separadorPnj"
-    android:background="@color/colorSteelBlue"
-    android:layout_height="2dp"
-    android:layout_marginTop="30dp"
-    android:layout_width="match_parent"
-    app:layout_constraintTop_toBottomOf="@id/pjList"/>
+    <GridLayout
+      android:alignmentMode="alignBounds"
+      android:columnCount="2"
+      android:columnOrderPreserved="true"
+      android:id="@+id/pjList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:overScrollMode="always"
+      android:verticalScrollbarPosition="defaultPosition"
+      app:layout_constraintTop_toBottomOf="@id/pjListTitle"
+      android:useDefaultMargins="true">
+    </GridLayout>
 
-  <TextView
-    android:id="@+id/pnjListTitle"
-    android:gravity="center"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:layout_width="match_parent"
-    app:layout_constraintTop_toBottomOf="@id/separadorPnj"
-    android:text="@string/combat_pnj"
-    android:textSize="26sp"/>
+    <View
+      android:id="@+id/separadorPnj"
+      android:background="@color/colorSteelBlue"
+      android:layout_height="2dp"
+      android:layout_marginTop="30dp"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/pjList"/>
 
-  <GridLayout
-    android:id="@+id/pnjList"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:columnCount="2"
-    android:overScrollMode="always"
-    android:verticalScrollbarPosition="defaultPosition"
-    app:layout_constraintTop_toBottomOf="@id/pnjListTitle">
-  </GridLayout>
+    <TextView
+      android:id="@+id/pnjListTitle"
+      android:gravity="center"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      app:layout_constraintTop_toBottomOf="@id/separadorPnj"
+      android:text="@string/combat_pnj"
+      android:textSize="26sp"/>
 
-  <Button
-    android:id="@+id/combatJoin"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="40dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="10dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:text="@string/combat_join" />
+    <GridLayout
+      android:id="@+id/pnjList"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="20dp"
+      android:layout_marginTop="20dp"
+      android:columnCount="2"
+      android:overScrollMode="always"
+      android:verticalScrollbarPosition="defaultPosition"
+      app:layout_constraintTop_toBottomOf="@id/pnjListTitle">
+    </GridLayout>
 
-  <Button
-    android:id="@+id/combatLeft"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="40dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="10dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:text="@string/combat_left" />
+    <Button
+      android:id="@+id/combatJoin"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/pnjList"
+      android:text="@string/combat_join" />
 
-  <Button
-    android:id="@+id/combatFight"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="40dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:text="@string/combat_fight" />
+    <Button
+      android:id="@+id/combatLeft"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/pnjList"
+      android:text="@string/combat_left" />
 
-  <Button
-    android:id="@+id/combatInit"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="40dp"
-    android:layout_marginEnd="5dp"
-    android:layout_marginStart="5dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:text="@string/combat_init" />
+    <Button
+      android:id="@+id/combatFight"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/pnjList"
+      android:text="@string/combat_fight" />
 
-  <Button
-    android:id="@+id/combatCancel"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="40dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginStart="5dp"
-    android:text="@string/combat_cancel"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+      android:id="@+id/combatInit"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/combatPnj"
+      app:layout_constraintTop_toBottomOf="@id/pnjList"
+      android:text="@string/combat_init" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+      android:id="@+id/combatPnj"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="5dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="10dp"
+      app:layout_constraintStart_toEndOf="@id/combatInit"
+      app:layout_constraintEnd_toStartOf="@id/combatCancel"
+      app:layout_constraintTop_toBottomOf="@id/pnjList"
+      android:text="@string/combat_manage" />
+
+    <Button
+      android:id="@+id/combatCancel"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="40dp"
+      android:layout_marginEnd="10dp"
+      android:layout_marginStart="5dp"
+      android:layout_marginTop="10dp"
+      android:text="@string/combat_cancel"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/pnjList" />
+
+  </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -4,24 +4,29 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.example.ulric.avispro.R;
-import com.example.ulric.avispro.interfaces.MyCallbackData;
 import com.example.ulric.avispro.modelos.Combate;
 import com.example.ulric.avispro.modelos.Combatiente;
 import com.example.ulric.avispro.modelos.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +35,7 @@ import java.util.List;
 public class NewCombatActivity extends AppCompatActivity {
 
   private Usuario usuario;
+  private Combate combate;
   private List<Combatiente> pnjs = Collections.synchronizedList(new ArrayList<Combatiente>());
   private EditText titulo, descripcion;
 
@@ -42,6 +48,9 @@ public class NewCombatActivity extends AppCompatActivity {
     Bundle bundle = getIntent().getExtras();
     if (bundle != null) {
       this.usuario = (Usuario) bundle.getSerializable("usuario");
+      if (bundle.containsKey("combate")) {
+        this.combate = (Combate) bundle.getSerializable("combate");
+      }
     }
 
     // Modificamos el ActionBar
@@ -53,6 +62,49 @@ public class NewCombatActivity extends AppCompatActivity {
 
     final GridLayout gridLayout = findViewById(R.id.pnjsList);
 
+    if (this.combate != null) {
+      titulo.setText(combate.getNombre());
+      descripcion.setText(combate.getDescripcion());
+      for (String idPnj : combate.getIdPnjs()) {
+        FirebaseFirestore.getInstance().collection("combatiente").document(idPnj).get()
+          .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+              if (task.isSuccessful()) {
+                DocumentSnapshot d = task.getResult();
+                if (d.exists()) {
+                  Context contexto = getApplicationContext();
+                  final Combatiente pnj = d.toObject(Combatiente.class);
+                  final int childCount = gridLayout.getChildCount();
+                  TextView pnjText = new TextView(contexto);
+                  pnjText.setText(String.format("%s", pnj.getNombre()));
+                  pnjText.setTextSize(22);
+                  ViewGroup.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                  ((LinearLayout.LayoutParams) params).setMargins(0, 0, 10, 0);
+                  pnjText.setLayoutParams(params);
+                  ImageButton imageButton = new ImageButton(contexto);
+                  imageButton.setImageResource(R.mipmap.ic_delete);
+                  imageButton.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+                  imageButton.setScaleX((float)0.75);
+                  imageButton.setScaleY((float)0.75);
+                  imageButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                      borrarPnj(gridLayout, childCount, pnj);
+                    }
+                  });
+                  LinearLayout linearLayout = new LinearLayout(contexto);
+                  linearLayout.addView(pnjText, 0);
+                  linearLayout.addView(imageButton, 1);
+                  params = new LinearLayout.LayoutParams((gridLayout.getWidth() / 2), ViewGroup.LayoutParams.WRAP_CONTENT);
+                  linearLayout.setLayoutParams(params);
+                  gridLayout.addView(linearLayout, childCount);
+                }
+              }
+            }
+          });
+      }
+    }
     ImageButton add = findViewById(R.id.addPnjImage);
     add.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -132,7 +184,7 @@ public class NewCombatActivity extends AppCompatActivity {
                   pnj.guardarCombatiente();
                   idPnjs.add(pnj.getIdCombatiente());
                 }
-                Combate c = new Combate();
+                Combate c = (combate != null) ? new Combate() : combate;
                 c.setNombre(titulo.getText().toString());
                 c.setDescripcion(descripcion.getText().toString());
                 c.setIdPjs(idPnjs);
@@ -156,4 +208,23 @@ public class NewCombatActivity extends AppCompatActivity {
     return true ;
   }
 
+  private void borrarPnj(final GridLayout gridLayout, final int childCount, final Combatiente pnj) {
+    View child = gridLayout.getChildAt(childCount);
+    View view = getLayoutInflater().inflate(R.layout.dialog_delete_npc, null, false);
+    AlertDialog.Builder builder = new AlertDialog.Builder(NewCombatActivity.this);
+    final TextView dialogText = view.findViewById(R.id.dialog_delete_npc_text);
+    dialogText.setText(String.format("%s %s %s", R.string.dialog_delete_npc_text, pnj.getNombre(), "?"));
+    builder.setTitle(R.string.dialog_delete_npc_title).setView(view)
+        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) { }
+        })
+        .setPositiveButton(R.string.dialog_accept, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int which) {
+            gridLayout.removeViewAt(childCount);
+            combate.quitarPnj(pnj);
+          }
+        }).show();
+  }
 }

@@ -217,7 +217,7 @@ public class ListActivity extends AppCompatActivity {
               if (document.exists()) {
                 Log.d("Usuario", "DocumentSnapshot data: " + document.getData());
                 Personaje p = document.toObject(Personaje.class);
-                p.cargarAvatar(getApplicationContext(), false);
+                //p.cargarAvatar(getApplicationContext(), false);
                 personajes.add(p);
                 Collections.sort(personajes);
                 adapter.notifyItemInserted(personajes.size() - 1);
@@ -230,6 +230,5 @@ public class ListActivity extends AppCompatActivity {
           }
         });
     }
-
   }
 }

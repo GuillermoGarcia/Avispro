@@ -117,7 +117,8 @@
   <string name="combat_join">Unirse al Combate</string>
   <string name="combat_left">Dejar el Combate</string>
   <string name="combat_fight">Combatir</string>
-  <string name="combat_init">Iniciar Combate</string>
+  <string name="combat_init">Iniciar\nCombate</string>
+  <string name="combat_manage">Gestionar\nCombate</string>
   <string name="combat_cancel">Volver</string>
   <string name="combat_wait_start">Te has unido al combate, podrás entrar una vez el master lo inicie.</string>
   <string name="dialog_combat_join_title">Unirse al combate</string>
@@ -136,6 +137,8 @@
   <string name="dialog_new_pnj_speed">Velocidad del Arma</string>
   <string name="dialog_save_combat">Confirme que desea guardar la información del combate</string>
   <string name="dialog_save_combat_title">Guardar Combate</string>
+  <string name="dialog_delete_npc_text">¿Realmente desea borrar el pnj</string>
+  <string name="dialog_delete_npc_title">Borrar pnj</string>
 
   <!--   Lead Activity  -->
   <string name="name_action">Acción</string>

@@ -91,7 +91,9 @@
     android:layout_width="match_parent" />
 
   <GridLayout
-    android:columnCount="1"
+    android:alignmentMode="alignBounds"
+    android:columnCount="2"
+    android:columnOrderPreserved="true"
     android:id="@+id/pnjsList"
     android:layout_height="wrap_content"
     android:layout_marginTop="20dp"
@@ -99,8 +101,8 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/separator"
-    android:orientation="vertical"
-    android:verticalScrollbarPosition="defaultPosition">
+    android:verticalScrollbarPosition="defaultPosition"
+    android:useDefaultMargins="true">
 
   </GridLayout>
 

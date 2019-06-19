@@ -2,6 +2,10 @@
 
 Código android del proyecto Avispro como pfc para el curso 2º DAM del IES Campanillas
 
+
+[logo]: https://github.com/guillermogarcia/Avispro/blob/master/logo/avispro.png "Logo Title Text 2"
+
+
 ## Descripción
 
 ***A***sistente ***VIS***ual para ***P***ersonajes de ***R***ol ***O***nline (Avispro), como su nombre indica es un asistente para la gestión de las fichas de personajes en partidas de rol online, o en mesa, está implementado sobre las reglas ParamoD20.

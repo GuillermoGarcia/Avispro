@@ -1,6 +1,6 @@
 # Avispro Android
 
-Código android del proyecto Avispro
+Código android del proyecto Avispro como pfc para el curso 2º DAM del IES Campanillas
 
 ## Caracteristicas
 

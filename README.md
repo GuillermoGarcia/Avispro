@@ -4,7 +4,7 @@ Código android del proyecto Avispro como pfc para el curso 2º DAM del IES Camp
 
 ## Descripción
 
-Asistente VISual para Personajes de Rol Online (Avispro), como su nombre indica es un asistente para la gestión de las fichas de personajes en partidas de rol online, o en mesa, está implementado sobre las reglas ParamoD20.
+***A***sistente ***VIS***ual para ***P***ersonajes de ***R***ol ***O***nline (Avispro), como su nombre indica es un asistente para la gestión de las fichas de personajes en partidas de rol online, o en mesa, está implementado sobre las reglas ParamoD20.
 
 Cada usuario puede gestinar multiples personajes y además puede incluir sus personajes en cualquier combate creado por un master.
 

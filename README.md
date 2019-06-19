@@ -3,7 +3,7 @@
 Código android del proyecto Avispro como pfc para el curso 2º DAM del IES Campanillas
 
 
-![AVISPRO LOGO] (https://github.com/guillermogarcia/Avispro/blob/master/logo/avispro.png "Logo Title Text 2")
+![AVISPRO LOGO](https://github.com/guillermogarcia/Avispro/blob/master/logo/avispro.png "Logo Title Text 2")
 
 
 ## Descripción
